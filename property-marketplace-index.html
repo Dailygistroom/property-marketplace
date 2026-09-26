@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A modern Nigerian property marketplace for buying, renting and discovering property.">
+  <title>Property Marketplace — Find Your Next Property</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+:root{
+  --navy:#0A1628;--blue:#38BDF8;--white:#FFFFFF;--off:#F7F8FA;--text:#111827;--muted:#6B7280;--border:#E5E7EB;--shadow:0 14px 40px rgba(10,22,40,.08);
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--text);background:var(--white);line-height:1.5}
+button,input,select{font:inherit}button,a{touch-action:manipulation}.site-header{height:72px;padding:0 clamp(18px,5vw,64px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);z-index:10}
+.brand{display:flex;align-items:center;gap:10px;color:var(--navy);text-decoration:none;font-weight:800;font-size:18px}.brand-mark{width:32px;height:32px;border-radius:9px;background:var(--navy);color:white;display:grid;place-items:center}.brand-muted{font-weight:500;color:var(--muted);margin-left:3px}
+.desktop-nav{display:flex;align-items:center;gap:24px}.desktop-nav a{color:var(--text);text-decoration:none;font-size:14px;font-weight:600}.nav-post{padding:11px 16px;background:var(--navy)!important;color:white!important;border-radius:10px}
+.menu-btn{display:none;background:none;border:0;font-size:25px}.hero{background:linear-gradient(180deg,#F7F8FA 0%,#fff 100%);padding:72px 20px 38px}.hero-inner{max-width:1180px;margin:auto}.eyebrow,.kicker{font-size:12px;letter-spacing:.12em;font-weight:800;color:#4B6687;margin:0 0 9px}.hero h1{font-size:clamp(40px,7vw,74px);line-height:1.02;letter-spacing:-.055em;margin:0;max-width:800px;color:var(--navy)}.hero h1 span{color:#1E91C4}.hero-copy{max-width:620px;font-size:18px;color:var(--muted);margin:20px 0 32px}.search-panel{background:white;border:1px solid var(--border);border-radius:20px;box-shadow:var(--shadow);padding:16px}.search-tabs{display:flex;gap:5px;margin-bottom:15px;overflow:auto}.tab{border:0;background:transparent;padding:10px 15px;border-radius:9px;color:var(--muted);font-weight:700;white-space:nowrap}.tab.active{background:var(--navy);color:white}.search-form{display:grid;grid-template-columns:1.4fr 1fr .8fr .8fr auto;gap:10px;align-items:end}.search-form label{font-size:12px;color:var(--muted);font-weight:700}.search-form input,.search-form select{display:block;width:100%;margin-top:6px;height:46px;border:1px solid var(--border);border-radius:10px;padding:0 12px;background:white;color:var(--text);outline:none}.search-form input:focus,.search-form select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(56,189,248,.15)}.primary-btn,.secondary-btn{border:0;border-radius:10px;padding:13px 17px;font-weight:800;cursor:pointer}.primary-btn{background:var(--navy);color:white}.secondary-btn{background:white;color:var(--navy);border:1px solid var(--border)}.search-btn{height:46px;white-space:nowrap}.quick-links{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:16px;color:var(--muted);font-size:13px}.quick-links button,.text-btn{border:0;background:none;color:var(--navy);font-weight:700;cursor:pointer;padding:4px}.section{max-width:1180px;margin:auto;padding:72px 20px}.section.alt{max-width:none;background:var(--off)}.section.alt>*{max-width:1180px;margin-left:auto;margin-right:auto}.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:24px}.section h2{font-size:clamp(26px,4vw,38px);letter-spacing:-.035em;margin:0;color:var(--navy)}.property-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.property-card{border:1px solid var(--border);border-radius:16px;overflow:hidden;background:white;box-shadow:0 6px 24px rgba(10,22,40,.05);cursor:pointer;transition:transform .2s ease,box-shadow .2s ease;display:flex;flex-direction:column}.property-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}.image-wrap{position:relative}.property-img{height:220px;width:100%;object-fit:cover;background:#e9edf2;display:block}.save-btn{position:absolute;right:12px;top:12px;width:38px;height:38px;border:0;border-radius:50%;background:rgba(255,255,255,.94);color:var(--navy);font-size:22px;cursor:pointer}.save-btn.saved{color:#dc2626}.image-badge{position:absolute;left:12px;top:12px}.property-body{padding:16px}.badge{display:inline-block;background:#E9F8FF;color:#08739B;border-radius:999px;padding:5px 9px;font-size:10px;font-weight:800;letter-spacing:.04em}.property-title{font-size:17px;font-weight:800;margin:10px 0 4px;color:var(--navy)}.price{font-size:20px;font-weight:800;color:var(--navy)}.location{font-size:13px;color:var(--muted);margin:5px 0 13px}.meta{display:flex;gap:13px;color:var(--muted);font-size:12px;padding-top:12px;border-top:1px solid var(--border)}.agent-row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:14px;font-size:12px;font-weight:700}.demo-label{color:var(--muted);font-weight:600;font-size:10px}.view-btn{margin-top:14px;width:100%;border:1px solid var(--navy);background:white;color:var(--navy);border-radius:10px;padding:11px;font-weight:800;cursor:pointer}.view-btn:hover{background:var(--navy);color:white}.verified{color:#08739B}.category-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.category-card{text-align:left;background:white;border:1px solid var(--border);border-radius:15px;padding:22px;min-height:120px;cursor:pointer}.category-card strong{display:block;color:var(--navy);font-size:17px;margin-bottom:7px}.category-card span{color:var(--muted);font-size:13px}.cta{background:var(--navy);color:white;border-radius:22px;padding:38px;display:flex;justify-content:space-between;align-items:center;gap:25px}.cta h2{margin:0;font-size:34px}.cta p:not(.kicker){color:#CBD5E1;max-width:650px}.cta .primary-btn{background:var(--blue);color:var(--navy);white-space:nowrap}.legal-strip{display:flex;justify-content:space-between;align-items:center;gap:30px;border-top:1px solid var(--border)}.legal-strip h2{margin-bottom:8px}.legal-strip p:not(.kicker){color:var(--muted);max-width:650px}.footer{background:var(--off);border-top:1px solid var(--border);padding:40px max(20px,5vw);display:flex;justify-content:space-between;gap:30px;color:var(--muted);font-size:13px}.footer-links{display:flex;gap:18px;flex-wrap:wrap}.footer a{color:var(--text);text-decoration:none}.footer-brand{font-size:16px}.modal{position:fixed;inset:0;background:rgba(0,0,0,.48);display:grid;place-items:center;padding:18px;z-index:30}.hidden{display:none!important}.modal-card{background:white;max-width:650px;width:100%;max-height:90vh;overflow:auto;border-radius:20px;padding:28px;position:relative}.modal-close{position:absolute;right:15px;top:12px;border:0;background:var(--off);width:38px;height:38px;border-radius:50%;font-size:25px;cursor:pointer}.detail-img{width:100%;height:300px;object-fit:cover;border-radius:13px}.detail-price{font-size:28px;font-weight:800;color:var(--navy);margin-top:10px}.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}.detail-item{background:var(--off);padding:13px;border-radius:10px}.mobile-nav{display:none}
+@media(max-width:900px){.desktop-nav{display:none}.menu-btn{display:block}.search-form{grid-template-columns:1fr 1fr}.search-btn{grid-column:1/-1}.property-grid{grid-template-columns:repeat(2,1fr)}.category-grid{grid-template-columns:repeat(2,1fr)}.legal-strip{flex-direction:column;align-items:flex-start}}
+@media(max-width:600px){.site-header{height:64px}.hero{padding:44px 16px 30px}.hero h1{font-size:43px}.hero-copy{font-size:16px}.search-form{grid-template-columns:1fr}.search-btn{grid-column:auto}.property-grid{grid-template-columns:1fr}.property-img{height:220px}.category-grid{grid-template-columns:1fr 1fr}.section{padding:52px 16px}.cta{padding:26px;display:block}.cta h2{font-size:28px}.cta .primary-btn{margin-top:14px}.footer{display:block;padding-bottom:92px}.footer-links{margin-top:20px}.mobile-nav{position:fixed;display:flex;bottom:10px;left:10px;right:10px;background:rgba(10,22,40,.97);border-radius:17px;padding:8px;z-index:20;justify-content:space-around;box-shadow:var(--shadow)}.mobile-nav a{color:white;text-decoration:none;text-align:center;font-size:20px;min-width:54px;padding:5px}.mobile-nav span{display:block;font-size:9px;margin-top:1px}.mobile-post{background:var(--blue);color:var(--navy)!important;border-radius:12px}.detail-img{height:230px}.detail-grid{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Property Marketplace home">
+      <span class="brand-mark">P</span><span>Property<span class="brand-muted">Marketplace</span></span>
+    </a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="#buy">Buy</a><a href="#rent">Rent</a><a href="#land">Land</a><a href="#shortlet">Shortlet</a><a href="#commercial">Commercial</a>
+      <a class="nav-post" href="#post">Post Property</a>
+    </nav>
+    <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false">☰</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="eyebrow">NIGERIA'S PROPERTY MARKETPLACE</div>
+        <h1>Find your <span>next property.</span></h1>
+        <p class="hero-copy">Buy, rent, sell and discover properties from property professionals and owners.</p>
+
+        <div class="search-panel">
+          <div class="search-tabs" role="tablist">
+            <button class="tab active" data-purpose="Buy">Buy</button>
+            <button class="tab" data-purpose="Rent">Rent</button>
+            <button class="tab" data-purpose="Land">Land</button>
+            <button class="tab" data-purpose="Shortlet">Shortlet</button>
+          </div>
+          <form id="searchForm" class="search-form">
+            <label>Location<input id="location" type="text" placeholder="e.g. Lekki, Lagos"></label>
+            <label>Property type<select id="type"><option value="">Any type</option><option>Apartment</option><option>Duplex</option><option>Detached House</option><option>Terrace</option><option>Land</option><option>Commercial</option></select></label>
+            <label>Min price<input id="minPrice" type="number" inputmode="numeric" placeholder="₦0"></label>
+            <label>Max price<input id="maxPrice" type="number" inputmode="numeric" placeholder="No max"></label>
+            <button class="primary-btn search-btn" type="submit">Search properties</button>
+          </form>
+        </div>
+
+        <div class="quick-links">
+          <span>Popular:</span>
+          <button data-location="Lekki">Lekki</button><button data-location="Ajah">Ajah</button><button data-location="Ikoyi">Ikoyi</button><button data-location="Victoria Island">Victoria Island</button><button data-location="Ikeja">Ikeja</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="results">
+      <div class="section-head">
+        <div><p class="kicker">DISCOVER</p><h2>Featured properties</h2></div>
+        <button class="text-btn" id="clearSearch" type="button">View all properties</button>
+      </div>
+      <div id="propertyGrid" class="property-grid"></div>
+      <p id="emptyState" class="empty hidden">No properties match your search. Try a different location or filter.</p>
+    </section>
+
+    <section class="section alt">
+      <div class="section-head"><div><p class="kicker">EXPLORE</p><h2>Browse by category</h2></div></div>
+      <div class="category-grid">
+        <button class="category-card" data-category="Apartment"><strong>Apartments</strong><span>Modern city living</span></button>
+        <button class="category-card" data-category="Duplex"><strong>Houses & duplexes</strong><span>Space for the whole family</span></button>
+        <button class="category-card" data-category="Land"><strong>Land</strong><span>Build your next project</span></button>
+        <button class="category-card" data-category="Commercial"><strong>Commercial</strong><span>Spaces for business</span></button>
+      </div>
+    </section>
+
+    <section class="section" id="post">
+      <div class="cta">
+        <div><p class="kicker">FOR AGENTS & OWNERS</p><h2>List your property free.</h2><p>Reach buyers and tenants looking for their next property. Basic listings will be free, with optional paid promotion for extra visibility.</p></div>
+        <button class="primary-btn" id="postBtn" type="button">Post a property</button>
+      </div>
+    </section>
+
+    <section class="section legal-strip">
+      <div><p class="kicker">PROPERTY SUPPORT</p><h2>Need legal help with a property?</h2><p>Future-ready connection to LAWFi for due diligence, agreements and property transaction support.</p></div>
+      <button class="secondary-btn" type="button" onclick="alert('LAWFi integration will be added in a later phase.')">Get property legal support</button>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div><div class="brand footer-brand"><span class="brand-mark">P</span><span>Property<span class="brand-muted">Marketplace</span></span></div><p>Property discovery, built for a simpler search.</p></div>
+    <div class="footer-links"><a href="#">About</a><a href="#">Contact</a><a href="#">For Agents</a><a href="#">Privacy</a><a href="#">Terms</a></div>
+  </footer>
+
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <button class="modal-close" type="button" aria-label="Close">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <nav class="mobile-nav" aria-label="Mobile navigation">
+    <a href="#">⌂<span>Home</span></a><a href="#results">⌕<span>Search</span></a><a href="#post" class="mobile-post">＋<span>Post</span></a><a href="#">♡<span>Saved</span></a><a href="#">◯<span>Account</span></a>
+  </nav>
+
+  <script>
+const properties=[
+ {id:1,title:"4 Bedroom Detached Duplex",price:120000000,location:"Lekki Phase 1, Lagos",type:"Duplex",beds:4,baths:5,size:"500 sqm",agent:"Sample Property Listing",featured:true,img:"https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",desc:"Modern detached duplex with generous living spaces, private parking and a contemporary family layout."},
+ {id:2,title:"Luxury 3 Bedroom Apartment",price:85000000,location:"Ikoyi, Lagos",type:"Apartment",beds:3,baths:4,size:"210 sqm",agent:"Sample Property Listing",featured:true,img:"https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",desc:"Contemporary apartment with spacious interiors, premium finishes and a convenient city location."},
+ {id:3,title:"Residential Land — 600 sqm",price:45000000,location:"Sangotedo, Lagos",type:"Land",beds:0,baths:0,size:"600 sqm",agent:"Sample Property Listing",featured:true,img:"https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80",desc:"Residential land suitable for a future home or development project, subject to title and planning verification."},
+ {id:4,title:"4 Bedroom Semi-Detached House",price:95000000,location:"Ajah, Lagos",type:"Detached House",beds:4,baths:4,size:"420 sqm",agent:"Sample Property Listing",featured:false,img:"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",desc:"Well-planned family home with modern fittings, generous living areas and private parking."},
+ {id:5,title:"2 Bedroom Serviced Apartment",price:6500000,location:"Victoria Island, Lagos",type:"Apartment",beds:2,baths:2,size:"140 sqm",agent:"Sample Property Listing",featured:false,img:"https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=80",desc:"Serviced apartment suitable for corporate and executive living in a central Lagos location."},
+ {id:6,title:"Commercial Office Space",price:18000000,location:"Ikeja, Lagos",type:"Commercial",beds:0,baths:2,size:"300 sqm",agent:"Sample Property Listing",featured:false,img:"https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80",desc:"Open-plan commercial office space suitable for a growing business, subject to inspection and availability."},
+ {id:7,title:"3 Bedroom Terrace Home",price:72000000,location:"Chevron, Lekki, Lagos",type:"Terrace",beds:3,baths:4,size:"260 sqm",agent:"Sample Property Listing",featured:false,img:"https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1200&q=80",desc:"Modern terrace home with practical family spaces and a contemporary finish."},
+ {id:8,title:"2 Bedroom Apartment",price:5500000,location:"Yaba, Lagos",type:"Apartment",beds:2,baths:2,size:"120 sqm",agent:"Sample Property Listing",featured:false,img:"https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80",desc:"Bright two-bedroom apartment suited to city living and convenient access to major routes."}
+];
+let purpose="Buy";
+const grid=document.getElementById("propertyGrid"), empty=document.getElementById("emptyState"), modal=document.getElementById("modal"), modalContent=document.getElementById("modalContent");
+const naira=n=>new Intl.NumberFormat("en-NG",{style:"currency",currency:"NGN",maximumFractionDigits:0}).format(n).replace("NGN","₦");
+function card(p){return `<article class="property-card" data-id="${p.id}" tabindex="0" aria-label="View ${p.title}"><div class="image-wrap"><img class="property-img" src="${p.img}" alt="${p.title} in ${p.location}" loading="lazy"><button class="save-btn" type="button" aria-label="Save ${p.title}" data-save="${p.id}">♡</button>${p.featured?'<span class="badge image-badge">FEATURED</span>':''}</div><div class="property-body"><div class="property-title">${p.title}</div><div class="price">${naira(p.price)}</div><div class="location">📍 ${p.location}</div><div class="meta"><span>${p.beds?p.beds+" beds":"Land"}</span><span>${p.baths?p.baths+" baths":"—"}</span><span>${p.size}</span></div><div class="agent-row"><span>${p.agent}</span><span class="demo-label">Demo listing</span></div><button class="view-btn" type="button" data-view="${p.id}">View property</button></div></article>`}
+function render(list=properties, heading="Featured properties"){grid.innerHTML=list.map(card).join("");document.querySelector("#results h2").textContent=heading;empty.classList.toggle("hidden",!list.length);document.querySelectorAll(".property-card").forEach(el=>{el.addEventListener("click",e=>{if(e.target.closest("button"))return;openProperty(+el.dataset.id)});el.addEventListener("keydown",e=>{if(e.key==="Enter")openProperty(+el.dataset.id)})});document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();openProperty(+b.dataset.view)}));document.querySelectorAll("[data-save]").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();b.classList.toggle("saved");b.textContent=b.classList.contains("saved")?"♥":"♡"}))}
+function openProperty(id){const p=properties.find(x=>x.id===id);if(!p)return;modalContent.innerHTML=`<img class="detail-img" src="${p.img}" alt="${p.title}"><span class="badge" style="margin-top:14px">${p.featured?"FEATURED":"PROPERTY"}</span><h2 style="margin:9px 0 3px;color:var(--navy)">${p.title}</h2><div class="detail-price">${naira(p.price)}</div><p class="location">📍 ${p.location}</p><div class="detail-grid"><div class="detail-item"><b>Type</b><br>${p.type}</div><div class="detail-item"><b>Size</b><br>${p.size}</div><div class="detail-item"><b>Bedrooms</b><br>${p.beds||"—"}</div><div class="detail-item"><b>Bathrooms</b><br>${p.baths||"—"}</div></div><h3>Description</h3><p>${p.desc}</p><p><b>Listing status:</b> Demo listing — final listings will be submitted by verified agents, owners and developers.</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px"><button class="primary-btn" type="button" onclick="alert('WhatsApp enquiry will be connected in the next phase.')">Chat on WhatsApp</button><button class="secondary-btn" type="button" onclick="alert('Inspection requests will be connected in the next phase.')">Request Inspection</button></div>`;modal.classList.remove("hidden")}
+document.querySelector(".modal-close").addEventListener("click",()=>modal.classList.add("hidden"));modal.addEventListener("click",e=>{if(e.target===modal)modal.classList.add("hidden")});
+document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");purpose=t.dataset.purpose}));
+document.getElementById("searchForm").addEventListener("submit",e=>{e.preventDefault();const loc=document.getElementById("location").value.trim().toLowerCase(),type=document.getElementById("type").value,min=Number(document.getElementById("minPrice").value)||0,max=Number(document.getElementById("maxPrice").value)||Infinity;let out=properties.filter(p=>(!loc||p.location.toLowerCase().includes(loc))&&(!type||p.type===type)&&p.price>=min&&p.price<=max);render(out,out.length?"Search results":"Search results");document.getElementById("results").scrollIntoView({behavior:"smooth"})});
+document.querySelectorAll("[data-location]").forEach(b=>b.addEventListener("click",()=>{document.getElementById("location").value=b.dataset.location;document.getElementById("searchForm").requestSubmit()}));
+document.querySelectorAll("[data-category]").forEach(b=>b.addEventListener("click",()=>{const out=properties.filter(p=>p.type===b.dataset.category);render(out,b.querySelector("strong").textContent);document.getElementById("results").scrollIntoView({behavior:"smooth"})}));
+document.getElementById("clearSearch").addEventListener("click",()=>{document.getElementById("searchForm").reset();render(properties,"Featured properties");document.getElementById("results").scrollIntoView({behavior:"smooth"})});
+document.getElementById("postBtn").addEventListener("click",()=>alert("The free property listing form will be connected in the next phase."));
+render(properties.filter(p=>p.featured),"Featured properties");
+
+</script>
+</body>
+</html>
