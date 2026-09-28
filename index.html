@@ -141,6 +141,24 @@ button,input,select,textarea{font:inherit}button,a{touch-action:manipulation}
   .mobile-post{background:var(--blue);color:var(--navy)!important;border-radius:12px}
   .detail-img{height:230px}.detail-grid{grid-template-columns:1fr}
 }
+  
+.auth-actions{display:flex;align-items:center;gap:8px}
+.account-btn{padding:10px 14px;border:1px solid var(--border);background:white;color:var(--navy);border-radius:10px;font-weight:800;cursor:pointer}
+.account-btn.logged{background:var(--navy);color:white;border-color:var(--navy)}
+.auth-card{max-width:520px}
+.auth-tabs{display:flex;gap:6px;background:var(--off);padding:5px;border-radius:12px;margin:18px 0}
+.auth-tab{flex:1;border:0;background:transparent;padding:11px;border-radius:9px;font-weight:800;color:var(--muted);cursor:pointer}
+.auth-tab.active{background:white;color:var(--navy);box-shadow:0 3px 10px rgba(10,22,40,.06)}
+.auth-form{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.auth-form label{display:grid;gap:7px;font-size:12px;font-weight:800;color:var(--navy)}
+.auth-form input,.auth-form select{width:100%;padding:13px;border:1px solid var(--border);border-radius:10px;background:white;font:inherit;box-sizing:border-box}
+.auth-form .full{grid-column:1/-1}
+.auth-note{font-size:12px;color:var(--muted);line-height:1.55}
+.account-menu{display:grid;gap:9px;margin-top:18px}
+.account-menu button{width:100%;text-align:left;padding:13px 14px;border:1px solid var(--border);background:white;border-radius:10px;font-weight:800;color:var(--navy);cursor:pointer}
+.account-summary{background:var(--off);border-radius:14px;padding:15px;margin-top:15px}
+.account-summary strong{display:block;color:var(--navy);margin-bottom:4px}
+@media(max-width:700px){.auth-form{grid-template-columns:1fr}.auth-form .full{grid-column:auto}.auth-card{padding:22px}.auth-actions{display:none}}
   </style>
 </head>
 <body>
@@ -156,6 +174,7 @@ button,input,select,textarea{font:inherit}button,a{touch-action:manipulation}
       <a href="#commercial">Commercial</a>
       <a href="#lawfi">LawFi</a>
       <a class="nav-post" href="#post">List Your Property</a>
+      <div class="auth-actions"><button class="account-btn" id="accountBtn" type="button">Sign in</button></div>
     </nav>
     <button class="menu-btn" type="button" aria-label="Open menu">☰</button>
   </header>
@@ -231,7 +250,7 @@ button,input,select,textarea{font:inherit}button,a{touch-action:manipulation}
           <h2>List your property free.</h2>
           <p>Reach buyers and tenants looking for their next property. Add up to 6 pictures. Listings are submitted to the marketplace for review.</p>
         </div>
-        <a class="primary-btn" href="#list-form">Open listing form</a>
+        <button class="primary-btn" id="openListingBtn" type="button">Open listing form</button>
       </div>
 
       <div class="list-wrap" id="list-form" style="margin-top:24px">
@@ -320,6 +339,54 @@ button,input,select,textarea{font:inherit}button,a{touch-action:manipulation}
       <a href="https://lawfi.com.ng/" target="_blank" rel="noopener">Legal support</a>
     </div>
   </footer>
+
+  <div id="authModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
+    <div class="modal-card auth-card">
+      <button class="modal-close" id="authModalClose" type="button" aria-label="Close">×</button>
+      <p class="kicker">PROPERTY MARKETPLACE ACCOUNT</p>
+      <h2 id="authModalTitle" style="margin:0;color:var(--navy)">Sign in or create an account</h2>
+      <p class="auth-note" id="authIntro">Create an account to save properties, send enquiries, request inspections or list a property.</p>
+
+      <div id="authForms">
+        <div class="auth-tabs">
+          <button class="auth-tab active" id="loginTab" type="button">Sign in</button>
+          <button class="auth-tab" id="registerTab" type="button">Create account</button>
+        </div>
+
+        <form id="loginForm" class="auth-form">
+          <label class="full">Email<input name="email" type="email" required autocomplete="email" placeholder="you@example.com"></label>
+          <label class="full">Password<input name="password" type="password" required autocomplete="current-password" placeholder="Your password"></label>
+          <div class="full"><button class="primary-btn" type="submit" id="loginSubmit">Sign in</button></div>
+        </form>
+
+        <form id="registerForm" class="auth-form hidden">
+          <label class="full">Full name<input name="full_name" required autocomplete="name" placeholder="Your full name"></label>
+          <label>Email<input name="email" type="email" required autocomplete="email" placeholder="you@example.com"></label>
+          <label>Phone / WhatsApp<input name="phone" autocomplete="tel" placeholder="080... or +234..."></label>
+          <label class="full">Account type
+            <select name="role" required>
+              <option value="seeker">Property seeker</option>
+              <option value="agent">Agent</option>
+              <option value="landlord">Landlord</option>
+              <option value="developer">Developer</option>
+            </select>
+          </label>
+          <label>Password<input name="password" type="password" minlength="8" required autocomplete="new-password" placeholder="At least 8 characters"></label>
+          <label>Confirm password<input name="confirm_password" type="password" minlength="8" required autocomplete="new-password" placeholder="Repeat password"></label>
+          <div class="full"><button class="primary-btn" type="submit" id="registerSubmit">Create account</button></div>
+        </form>
+        <div id="authStatus"></div>
+      </div>
+
+      <div id="accountPanel" class="hidden">
+        <div class="account-summary" id="accountSummary"></div>
+        <div class="account-menu">
+          <button type="button" id="accountListBtn">List a property</button>
+          <button type="button" id="accountLogoutBtn">Log out</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div id="legalModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="legalModalTitle">
     <div class="modal-card">
@@ -548,6 +615,158 @@ async function loadLiveProperties(){
 }
 
 
+
+const authModal = document.getElementById("authModal");
+const authStatus = document.getElementById("authStatus");
+const authForms = document.getElementById("authForms");
+const accountPanel = document.getElementById("accountPanel");
+let currentUser = null;
+let pendingAction = null;
+
+function showAuth(mode="login", action=null){
+  pendingAction = action;
+  authModal.classList.remove("hidden");
+  authForms.classList.remove("hidden");
+  accountPanel.classList.add("hidden");
+  authStatus.innerHTML = "";
+  setAuthMode(mode);
+}
+
+function setAuthMode(mode){
+  const login = mode === "login";
+  document.getElementById("loginTab").classList.toggle("active", login);
+  document.getElementById("registerTab").classList.toggle("active", !login);
+  document.getElementById("loginForm").classList.toggle("hidden", !login);
+  document.getElementById("registerForm").classList.toggle("hidden", login);
+}
+
+function renderAccountState(){
+  const btn = document.getElementById("accountBtn");
+  if(currentUser){
+    btn.textContent = "Account";
+    btn.classList.add("logged");
+  }else{
+    btn.textContent = "Sign in";
+    btn.classList.remove("logged");
+  }
+}
+
+function showAccountPanel(){
+  if(!currentUser){ showAuth("login"); return; }
+  authModal.classList.remove("hidden");
+  authForms.classList.add("hidden");
+  accountPanel.classList.remove("hidden");
+  document.getElementById("accountSummary").innerHTML = `
+    <strong>${currentUser.full_name}</strong>
+    <div>${currentUser.email}</div>
+    <div style="margin-top:5px;text-transform:capitalize">Account: ${currentUser.role}</div>`;
+}
+
+function continuePendingAction(){
+  const action = pendingAction;
+  pendingAction = null;
+  if(action === "list"){
+    document.getElementById("post").scrollIntoView({behavior:"smooth"});
+    setTimeout(()=>document.getElementById("list-form").scrollIntoView({behavior:"smooth"}),250);
+  }
+}
+
+async function checkAuth(){
+  try{
+    const res = await fetch("/api/auth/me", {credentials:"same-origin"});
+    const data = await res.json();
+    currentUser = data.authenticated ? data.user : null;
+  }catch(e){ currentUser = null; }
+  renderAccountState();
+}
+
+document.getElementById("accountBtn").addEventListener("click",()=>{
+  currentUser ? showAccountPanel() : showAuth("login");
+});
+document.getElementById("mobileAccountBtn").addEventListener("click",e=>{
+  e.preventDefault();
+  currentUser ? showAccountPanel() : showAuth("login");
+});
+document.getElementById("authModalClose").addEventListener("click",()=>authModal.classList.add("hidden"));
+authModal.addEventListener("click",e=>{ if(e.target===authModal) authModal.classList.add("hidden"); });
+document.getElementById("loginTab").addEventListener("click",()=>setAuthMode("login"));
+document.getElementById("registerTab").addEventListener("click",()=>setAuthMode("register"));
+
+document.getElementById("loginForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const form=e.target;
+  const btn=document.getElementById("loginSubmit");
+  authStatus.innerHTML="";
+  btn.disabled=true; btn.textContent="Signing in...";
+  try{
+    const res=await fetch("/api/auth/login",{
+      method:"POST",credentials:"same-origin",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({email:form.email.value.trim(),password:form.password.value})
+    });
+    const data=await res.json().catch(()=>({}));
+    if(!res.ok || !data.ok) throw new Error(data.error || "Unable to sign in.");
+    currentUser=data.user;
+    renderAccountState();
+    authModal.classList.add("hidden");
+    form.reset();
+    continuePendingAction();
+  }catch(err){
+    authStatus.innerHTML=`<div class="status-msg err">${err.message}</div>`;
+  }finally{
+    btn.disabled=false; btn.textContent="Sign in";
+  }
+});
+
+document.getElementById("registerForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const form=e.target;
+  const btn=document.getElementById("registerSubmit");
+  if(form.password.value!==form.confirm_password.value){
+    authStatus.innerHTML='<div class="status-msg err">Passwords do not match.</div>';
+    return;
+  }
+  authStatus.innerHTML="";
+  btn.disabled=true; btn.textContent="Creating account...";
+  try{
+    const res=await fetch("/api/auth/register",{
+      method:"POST",credentials:"same-origin",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        full_name:form.full_name.value.trim(),
+        email:form.email.value.trim(),
+        phone:form.phone.value.trim(),
+        password:form.password.value,
+        role:form.role.value
+      })
+    });
+    const data=await res.json().catch(()=>({}));
+    if(!res.ok || !data.ok) throw new Error(data.error || "Unable to create account.");
+    authStatus.innerHTML='<div class="status-msg ok">Account created. You can now sign in.</div>';
+    form.reset();
+    setTimeout(()=>setAuthMode("login"),500);
+  }catch(err){
+    authStatus.innerHTML=`<div class="status-msg err">${err.message}</div>`;
+  }finally{
+    btn.disabled=false; btn.textContent="Create account";
+  }
+});
+
+document.getElementById("accountLogoutBtn").addEventListener("click",async()=>{
+  await fetch("/api/auth/logout",{method:"POST",credentials:"same-origin"}).catch(()=>{});
+  currentUser=null;
+  renderAccountState();
+  authModal.classList.add("hidden");
+});
+document.getElementById("accountListBtn").addEventListener("click",()=>{
+  authModal.classList.add("hidden");
+  document.getElementById("post").scrollIntoView({behavior:"smooth"});
+});
+document.getElementById("openListingBtn").addEventListener("click",()=>{
+  if(!currentUser){ showAuth("login","list"); return; }
+  document.getElementById("post").scrollIntoView({behavior:"smooth"});
+});
+
 const legalModal = document.getElementById("legalModal");
 document.getElementById("openLegalOptions").addEventListener("click",()=>{
   legalModal.classList.remove("hidden");
@@ -608,6 +827,7 @@ document.getElementById("photos").addEventListener("change", async e=>{
 });
 document.getElementById("listForm").addEventListener("submit", async e=>{
   e.preventDefault();
+  if(!currentUser){ showAuth("login","list"); return; }
   const form = e.target;
   const status = document.getElementById("formStatus");
   const btn = document.getElementById("submitListing");
@@ -657,6 +877,7 @@ document.getElementById("listForm").addEventListener("submit", async e=>{
 
 renderPhotoPreview();
 loadLiveProperties();
+checkAuth();
   </script>
 </body>
 </html>
