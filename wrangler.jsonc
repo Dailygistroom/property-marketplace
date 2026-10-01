@@ -3,6 +3,7 @@
   "name": "property-marketplace",
   "main": "worker.js",
   "compatibility_date": "2026-09-26",
+
   "d1_databases": [
     {
       "binding": "DB",
@@ -10,6 +11,14 @@
       "database_id": "390a392b-f7f9-4296-96b0-d435ffae054d"
     }
   ],
+
+  "r2_buckets": [
+    {
+      "binding": "IMAGES",
+      "bucket_name": "property-marketplace-images"
+    }
+  ],
+
   "assets": {
     "directory": ".",
     "binding": "ASSETS",
