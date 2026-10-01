@@ -26,27 +26,42 @@ export default {
       }
     }
 
-    // Serve private R2 images through the Worker
+    // Serve private R2 images
     if (url.pathname.startsWith("/api/images/")) {
       const key = decodeURIComponent(
         url.pathname.replace("/api/images/", "")
       );
 
       if (!key) {
-        return json({ ok: false, error: "Image not found." }, 404);
+        return json(
+          {
+            ok: false,
+            error: "Image not found."
+          },
+          404
+        );
       }
 
       try {
         const object = await env.IMAGES.get(key);
 
         if (!object) {
-          return json({ ok: false, error: "Image not found." }, 404);
+          return json(
+            {
+              ok: false,
+              error: "Image not found."
+            },
+            404
+          );
         }
 
         const headers = new Headers();
         object.writeHttpMetadata(headers);
         headers.set("etag", object.httpEtag);
-        headers.set("Cache-Control", "public, max-age=31536000");
+        headers.set(
+          "Cache-Control",
+          "public, max-age=31536000"
+        );
 
         return new Response(object.body, {
           headers
@@ -63,7 +78,10 @@ export default {
     }
 
     // Get approved properties
-    if (request.method === "GET" && url.pathname === "/api/properties") {
+    if (
+      request.method === "GET" &&
+      url.pathname === "/api/properties"
+    ) {
       try {
         const result = await env.DB.prepare(`
           SELECT *
@@ -85,7 +103,10 @@ export default {
             .all();
 
           property.images = (imageResult.results || []).map(
-            (row) => `/api/images/${encodeURIComponent(row.image_url)}`
+            (row) =>
+              `/api/images/${encodeURIComponent(
+                row.image_url
+              )}`
           );
         }
 
@@ -105,7 +126,10 @@ export default {
     }
 
     // Submit a property
-    if (request.method === "POST" && url.pathname === "/api/properties") {
+    if (
+      request.method === "POST" &&
+      url.pathname === "/api/properties"
+    ) {
       try {
         const data = await request.json();
 
@@ -137,11 +161,13 @@ export default {
           ? data.images
           : [];
 
+        // Maximum 6 pictures per property
         if (images.length > 6) {
           return json(
             {
               ok: false,
-              error: "A property can have a maximum of 6 pictures."
+              error:
+                "A property can have a maximum of 6 pictures."
             },
             400
           );
@@ -175,7 +201,7 @@ export default {
             amenities,
             status
           )
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `)
           .bind(
             propertyId,
@@ -268,13 +294,25 @@ export default {
       }
     }
 
-    // Let Cloudflare serve the website
+    // Explicitly serve index.html for the homepage
+    if (
+      request.method === "GET" &&
+      (url.pathname === "/" ||
+        url.pathname === "/index.html")
+    ) {
+      return env.ASSETS.fetch(
+        new Request(
+          new URL("/index.html", request.url),
+          request
+        )
+      );
+    }
+
+    // Serve all other static assets normally
     return env.ASSETS.fetch(request);
   }
 };
 
-
-// Convert a data URL base64 string into bytes
 function base64ToUint8Array(base64) {
   const binary = atob(base64);
   const bytes = new Uint8Array(binary.length);
@@ -285,7 +323,6 @@ function base64ToUint8Array(base64) {
 
   return bytes;
 }
-
 
 // Get a safe file extension
 function getExtension(contentType) {
@@ -301,14 +338,16 @@ function getExtension(contentType) {
   return map[contentType] || "jpg";
 }
 
-
 // JSON response helper
 function json(data, status = 200) {
-  return new Response(JSON.stringify(data), {
-    status,
-    headers: {
-      "Content-Type": "application/json; charset=UTF-8",
-      "Access-Control-Allow-Origin": "*"
+  return new Response(
+    JSON.stringify(data),
+    {
+      status,
+      headers: {
+        "Content-Type":
+          "application/json; charset=UTF-8",
+        "Access-Control-Allow-Origin": "*"
+      }
     }
-  });
-}
+  );
