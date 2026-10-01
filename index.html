@@ -3,881 +3,783 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A modern Nigerian property marketplace for buying, renting and listing properties, with LawFi legal support for title checks, document review and tenancy.">
+
+  <meta name="description" content="Property Marketplace — buy, rent, sell and discover properties with optional LawFi legal support.">
+
   <title>Property Marketplace — Find Your Next Property</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
+
+<style>
+
 :root{
-  --navy:#0A1628;--blue:#38BDF8;--white:#FFFFFF;--off:#F7F8FA;--text:#111827;--muted:#6B7280;--border:#E5E7EB;--shadow:0 14px 40px rgba(10,22,40,.08);--ok:#047857;--danger:#B91C1C;
-}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--text);background:var(--white);line-height:1.5}
-button,input,select,textarea{font:inherit}button,a{touch-action:manipulation}
-.site-header{height:72px;padding:0 clamp(18px,5vw,64px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);z-index:10}
-.brand{display:flex;align-items:center;gap:10px;color:var(--navy);text-decoration:none;font-weight:800;font-size:18px}
-.brand-mark{width:32px;height:32px;border-radius:9px;background:var(--navy);color:white;display:grid;place-items:center}
-.brand-muted{font-weight:500;color:var(--muted);margin-left:3px}
-.desktop-nav{display:flex;align-items:center;gap:24px}
-.desktop-nav a{color:var(--text);text-decoration:none;font-size:14px;font-weight:600}
-.nav-post{padding:11px 16px;background:var(--navy)!important;color:white!important;border-radius:10px}
-.menu-btn{display:none;background:none;border:0;font-size:25px}
-.hero{background:linear-gradient(180deg,#F7F8FA 0%,#fff 100%);padding:72px 20px 38px}
-.hero-inner{max-width:1180px;margin:auto}
-.eyebrow,.kicker{font-size:12px;letter-spacing:.12em;font-weight:800;color:#4B6687;margin:0 0 9px}
-.hero h1{font-size:clamp(40px,7vw,74px);line-height:1.02;letter-spacing:-.055em;margin:0;max-width:800px;color:var(--navy)}
-.hero h1 span{color:#1E91C4}
-.hero-copy{max-width:620px;font-size:18px;color:var(--muted);margin:20px 0 32px}
-.search-panel{background:white;border:1px solid var(--border);border-radius:20px;box-shadow:var(--shadow);padding:16px}
-.search-tabs{display:flex;gap:5px;margin-bottom:15px;overflow:auto}
-.tab{border:0;background:transparent;padding:10px 15px;border-radius:9px;color:var(--muted);font-weight:700;white-space:nowrap}
-.tab.active{background:var(--navy);color:white}
-.search-form{display:grid;grid-template-columns:1.4fr 1fr .8fr .8fr auto;gap:10px;align-items:end}
-.search-form label,.list-form label{font-size:12px;color:var(--muted);font-weight:700}
-.search-form input,.search-form select,.list-form input,.list-form select,.list-form textarea{display:block;width:100%;margin-top:6px;height:46px;border:1px solid var(--border);border-radius:10px;padding:0 12px;background:white;color:var(--text);outline:none}
-.list-form textarea{height:110px;padding:12px;resize:vertical}
-.search-form input:focus,.search-form select:focus,.list-form input:focus,.list-form select:focus,.list-form textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(56,189,248,.15)}
-.primary-btn,.secondary-btn{border:0;border-radius:10px;padding:13px 17px;font-weight:800;cursor:pointer}
-.primary-btn{background:var(--navy);color:white}
-.secondary-btn{background:white;color:var(--navy);border:1px solid var(--border)}
-.search-btn{height:46px;white-space:nowrap}
-.quick-links{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:16px;color:var(--muted);font-size:13px}
-.quick-links button,.text-btn{border:0;background:none;color:var(--navy);font-weight:700;cursor:pointer;padding:4px}
-.section{max-width:1180px;margin:auto;padding:72px 20px}
-.section.alt{max-width:none;background:var(--off)}
-.section.alt>*{max-width:1180px;margin-left:auto;margin-right:auto}
-.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:24px;gap:16px}
-.section h2{font-size:clamp(26px,4vw,38px);letter-spacing:-.035em;margin:0;color:var(--navy)}
-.property-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.property-card{border:1px solid var(--border);border-radius:16px;overflow:hidden;background:white;box-shadow:0 6px 24px rgba(10,22,40,.05);cursor:pointer;transition:transform .2s ease,box-shadow .2s ease;display:flex;flex-direction:column}
-.property-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
-.image-wrap{position:relative}
-.property-img{height:220px;width:100%;object-fit:cover;background:#e9edf2;display:block}
-.save-btn{position:absolute;right:12px;top:12px;width:38px;height:38px;border:0;border-radius:50%;background:rgba(255,255,255,.94);color:var(--navy);font-size:22px;cursor:pointer}
-.save-btn.saved{color:#dc2626}
-.image-badge{position:absolute;left:12px;top:12px}
-.property-body{padding:16px}
-.badge{display:inline-block;background:#E9F8FF;color:#08739B;border-radius:999px;padding:5px 9px;font-size:10px;font-weight:800;letter-spacing:.04em}
-.property-title{font-size:17px;font-weight:800;margin:10px 0 4px;color:var(--navy)}
-.price{font-size:20px;font-weight:800;color:var(--navy)}
-.location{font-size:13px;color:var(--muted);margin:5px 0 13px}
-.meta{display:flex;gap:13px;color:var(--muted);font-size:12px;padding-top:12px;border-top:1px solid var(--border)}
-.agent-row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:14px;font-size:12px;font-weight:700}
-.demo-label{color:var(--muted);font-weight:600;font-size:10px}
-.view-btn{margin-top:14px;width:100%;border:1px solid var(--navy);background:white;color:var(--navy);border-radius:10px;padding:11px;font-weight:800;cursor:pointer}
-.view-btn:hover{background:var(--navy);color:white}
-.category-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.category-card{text-align:left;background:white;border:1px solid var(--border);border-radius:15px;padding:22px;min-height:120px;cursor:pointer}
-.category-card strong{display:block;color:var(--navy);font-size:17px;margin-bottom:7px}
-.category-card span{color:var(--muted);font-size:13px}
-.cta{background:var(--navy);color:white;border-radius:22px;padding:38px;display:flex;justify-content:space-between;align-items:center;gap:25px}
-.cta h2{margin:0;font-size:34px}
-.cta p:not(.kicker){color:#CBD5E1;max-width:650px}
-.cta .primary-btn{background:var(--blue);color:var(--navy);white-space:nowrap}
-.legal-panel{background:white;border:1px solid var(--border);border-radius:22px;padding:28px;box-shadow:0 6px 24px rgba(10,22,40,.04)}
-.legal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
-.legal-card{border:1px solid var(--border);border-radius:16px;padding:18px;background:var(--off);text-align:left}
-.legal-card h3{margin:0 0 8px;font-size:16px;color:var(--navy)}
-.legal-card p{margin:0;color:var(--muted);font-size:14px}
-.lawfi-offers{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:24px}
-.lawfi-offers div{background:var(--off);border:1px solid var(--border);border-radius:12px;padding:15px 16px;color:var(--navy);font-size:12px;letter-spacing:.02em}
-.lawfi-offers strong{font-weight:800}
-@media(max-width:600px){.lawfi-offers{grid-template-columns:1fr}}
-
-.legal-card{font:inherit;cursor:pointer;text-align:left;width:100%;transition:border-color .2s ease,box-shadow .2s ease}
-.legal-card:hover{border-color:var(--blue);box-shadow:0 6px 18px rgba(10,22,40,.06)}
-
-.legal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
-.list-wrap{background:white;border:1px solid var(--border);border-radius:22px;padding:28px;box-shadow:var(--shadow)}
-.list-form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.list-form .full{grid-column:1/-1}
-.hint{font-size:12px;color:var(--muted);font-weight:500;margin-top:6px}
-.photo-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.photo-box{border:1px dashed var(--border);border-radius:12px;min-height:92px;background:var(--off);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;text-align:center;font-size:12px;color:var(--muted);position:relative;overflow:hidden}
-.photo-box img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.photo-box button{position:absolute;top:6px;right:6px;border:0;background:white;border-radius:50%;width:26px;height:26px;cursor:pointer;z-index:1}
-.status-msg{margin-top:14px;padding:12px 14px;border-radius:12px;font-weight:600;font-size:14px}
-.status-msg.ok{background:#ECFDF5;color:var(--ok)}
-.status-msg.err{background:#FEF2F2;color:var(--danger)}
-.footer{background:var(--off);border-top:1px solid var(--border);padding:40px max(20px,5vw);display:flex;justify-content:space-between;gap:30px;color:var(--muted);font-size:13px}
-.footer-links{display:flex;gap:18px;flex-wrap:wrap}
-.footer a{color:var(--text);text-decoration:none}
-.footer-brand{font-size:16px}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.48);display:grid;place-items:center;padding:18px;z-index:30}
-.hidden{display:none!important}
-.modal-card{background:white;max-width:650px;width:100%;max-height:90vh;overflow:auto;border-radius:20px;padding:28px;position:relative}
-.modal-close{position:absolute;right:15px;top:12px;border:0;background:var(--off);width:38px;height:38px;border-radius:50%;font-size:25px;cursor:pointer}
-.detail-img{width:100%;height:300px;object-fit:cover;border-radius:13px}
-.detail-price{font-size:28px;font-weight:800;color:var(--navy);margin-top:10px}
-.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
-.detail-item{background:var(--off);padding:13px;border-radius:10px}
-.thumbs{display:flex;gap:8px;overflow:auto;margin:10px 0 4px}
-.thumbs img{width:72px;height:56px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid transparent}
-.thumbs img.active{border-color:var(--navy)}
-.mobile-nav{display:none}
-.empty{color:var(--muted)}
-@media(max-width:900px){
-  .desktop-nav{display:none}.menu-btn{display:block}
-  .search-form,.list-form,.legal-grid{grid-template-columns:1fr 1fr}
-  .search-btn{grid-column:1/-1}
-  .property-grid{grid-template-columns:repeat(2,1fr)}
-  .category-grid{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:600px){
-  .site-header{height:64px}.hero{padding:44px 16px 30px}.hero h1{font-size:43px}.hero-copy{font-size:16px}
-  .search-form,.list-form,.legal-grid,.photo-row{grid-template-columns:1fr}
-  .search-btn{grid-column:auto}
-  .property-grid{grid-template-columns:1fr}
-  .category-grid{grid-template-columns:1fr 1fr}
-  .section{padding:52px 16px}
-  .cta,.list-wrap,.legal-panel{padding:22px;display:block}
-  .cta h2{font-size:28px}
-  .cta .primary-btn{margin-top:14px}
-  .footer{display:block;padding-bottom:92px}
-  .footer-links{margin-top:20px}
-  .mobile-nav{position:fixed;display:flex;bottom:10px;left:10px;right:10px;background:rgba(10,22,40,.97);border-radius:17px;padding:8px;z-index:20;justify-content:space-around;box-shadow:var(--shadow)}
-  .mobile-nav a{color:white;text-decoration:none;text-align:center;font-size:20px;min-width:54px;padding:5px}
-  .mobile-nav span{display:block;font-size:9px;margin-top:1px}
-  .mobile-post{background:var(--blue);color:var(--navy)!important;border-radius:12px}
-  .detail-img{height:230px}.detail-grid{grid-template-columns:1fr}
-}
-  
-.auth-actions{display:flex;align-items:center;gap:8px}
-.account-btn{padding:10px 14px;border:1px solid var(--border);background:white;color:var(--navy);border-radius:10px;font-weight:800;cursor:pointer}
-.account-btn.logged{background:var(--navy);color:white;border-color:var(--navy)}
-.auth-card{max-width:520px}
-.auth-tabs{display:flex;gap:6px;background:var(--off);padding:5px;border-radius:12px;margin:18px 0}
-.auth-tab{flex:1;border:0;background:transparent;padding:11px;border-radius:9px;font-weight:800;color:var(--muted);cursor:pointer}
-.auth-tab.active{background:white;color:var(--navy);box-shadow:0 3px 10px rgba(10,22,40,.06)}
-.auth-form{display:grid;grid-template-columns:1fr 1fr;gap:13px}
-.auth-form label{display:grid;gap:7px;font-size:12px;font-weight:800;color:var(--navy)}
-.auth-form input,.auth-form select{width:100%;padding:13px;border:1px solid var(--border);border-radius:10px;background:white;font:inherit;box-sizing:border-box}
-.auth-form .full{grid-column:1/-1}
-.auth-note{font-size:12px;color:var(--muted);line-height:1.55}
-.account-menu{display:grid;gap:9px;margin-top:18px}
-.account-menu button{width:100%;text-align:left;padding:13px 14px;border:1px solid var(--border);background:white;border-radius:10px;font-weight:800;color:var(--navy);cursor:pointer}
-.account-summary{background:var(--off);border-radius:14px;padding:15px;margin-top:15px}
-.account-summary strong{display:block;color:var(--navy);margin-bottom:4px}
-@media(max-width:700px){.auth-form{grid-template-columns:1fr}.auth-form .full{grid-column:auto}.auth-card{padding:22px}.auth-actions{display:none}}
-  </style>
-</head>
-<body>
-  <header class="site-header">
-    <a class="brand" href="index.html" aria-label="Property Marketplace home">
-      <span class="brand-mark">P</span><span>Property<span class="brand-muted">Marketplace</span></span>
-    </a>
-    <nav class="desktop-nav" aria-label="Main navigation">
-      <a href="#buy">Buy</a>
-      <a href="#rent">Rent</a>
-      <a href="#land">Land</a>
-      <a href="#shortlet">Shortlet</a>
-      <a href="#commercial">Commercial</a>
-      <a href="#lawfi">LawFi</a>
-      <a class="nav-post" href="#post">List Your Property</a>
-      <div class="auth-actions"><button class="account-btn" id="accountBtn" type="button">Sign in</button></div>
-    </nav>
-    <button class="menu-btn" type="button" aria-label="Open menu">☰</button>
-  </header>
-
-  <main>
-    <section class="hero" id="search">
-      <div class="hero-inner">
-        <div class="eyebrow">NIGERIA'S PROPERTY MARKETPLACE</div>
-        <h1>Find your <span>next property.</span></h1>
-        <p class="hero-copy">Buy, rent, sell and discover properties from property professionals and owners. Legal support is available through LawFi.</p>
-
-        <div class="search-panel">
-          <div class="search-tabs" role="tablist">
-            <button class="tab active" data-purpose="Buy" type="button">Buy</button>
-            <button class="tab" data-purpose="Rent" type="button">Rent</button>
-            <button class="tab" data-purpose="Land" type="button">Land</button>
-            <button class="tab" data-purpose="Shortlet" type="button">Shortlet</button>
-            <button class="tab" data-purpose="Commercial" type="button">Commercial</button>
-          </div>
-          <form id="searchForm" class="search-form">
-            <label>Location<input id="location" type="text" placeholder="e.g. Lekki, Lagos"></label>
-            <label>Property type
-              <select id="type">
-                <option value="">Any type</option>
-                <option>Apartment</option>
-                <option>Duplex</option>
-                <option>Detached House</option>
-                <option>Terrace</option>
-                <option>Land</option>
-                <option>Commercial</option>
-              </select>
-            </label>
-            <label>Min price<input id="minPrice" type="number" inputmode="numeric" placeholder="₦0"></label>
-            <label>Max price<input id="maxPrice" type="number" inputmode="numeric" placeholder="No max"></label>
-            <button class="primary-btn search-btn" type="submit">Search properties</button>
-          </form>
-        </div>
-
-        <div class="quick-links">
-          <span>Popular:</span>
-          <button type="button" data-location="Lekki">Lekki</button>
-          <button type="button" data-location="Ajah">Ajah</button>
-          <button type="button" data-location="Ikoyi">Ikoyi</button>
-          <button type="button" data-location="Victoria Island">Victoria Island</button>
-          <button type="button" data-location="Ikeja">Ikeja</button>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="results">
-      <div class="section-head">
-        <div><p class="kicker">DISCOVER</p><h2>Featured properties</h2></div>
-        <button class="text-btn" id="clearSearch" type="button">View all properties</button>
-      </div>
-      <div id="propertyGrid" class="property-grid"></div>
-      <p id="emptyState" class="empty hidden">No properties match your search. Try a different location or filter.</p>
-    </section>
-
-    <section class="section alt" id="categories">
-      <div class="section-head"><div><p class="kicker">EXPLORE</p><h2>Browse by category</h2></div></div>
-      <div class="category-grid">
-        <button class="category-card" data-category="Apartment" type="button"><strong>Apartments</strong><span>Modern city living</span></button>
-        <button class="category-card" data-category="Duplex" type="button"><strong>Houses & duplexes</strong><span>Space for the whole family</span></button>
-        <button class="category-card" data-category="Land" id="land" type="button"><strong>Land</strong><span>Build your next project</span></button>
-        <button class="category-card" data-category="Commercial" id="commercial" type="button"><strong>Commercial</strong><span>Spaces for business</span></button>
-      </div>
-    </section>
-
-    <section class="section" id="post">
-      <div class="cta">
-        <div>
-          <p class="kicker">FOR AGENTS & OWNERS</p>
-          <h2>List your property free.</h2>
-          <p>Reach buyers and tenants looking for their next property. Add up to 6 pictures. Listings are submitted to the marketplace for review.</p>
-        </div>
-        <button class="primary-btn" id="openListingBtn" type="button">Open listing form</button>
-      </div>
-
-      <div class="list-wrap" id="list-form" style="margin-top:24px">
-        <p class="kicker">LIST YOUR PROPERTY</p>
-        <h2 style="margin-bottom:8px">Submit a listing</h2>
-        <p class="hero-copy" style="margin-top:0">Required fields match the marketplace API. Maximum of 6 property pictures.</p>
-        <form id="listForm" class="list-form">
-          <label>Title<input name="title" required placeholder="e.g. 4 Bedroom Detached Duplex"></label>
-          <label>Location<input name="location" required placeholder="e.g. Lekki Phase 1, Lagos"></label>
-          <label>Category
-            <select name="category" required>
-              <option value="">Select category</option>
-              <option>Buy</option>
-              <option>Rent</option>
-              <option>Land</option>
-              <option>Shortlet</option>
-              <option>Commercial</option>
-            </select>
-          </label>
-          <label>Property type
-            <select name="property_type" required>
-              <option value="">Select type</option>
-              <option>Apartment</option>
-              <option>Duplex</option>
-              <option>Detached House</option>
-              <option>Terrace</option>
-              <option>Land</option>
-              <option>Commercial</option>
-            </select>
-          </label>
-          <label>Price (₦)<input name="price" type="number" inputmode="numeric" required min="1" placeholder="120000000"></label>
-          <label>Size (sqm)<input name="area_sqm" type="number" inputmode="numeric" min="0" placeholder="Optional"></label>
-          <label>Bedrooms<input name="bedrooms" type="number" inputmode="numeric" min="0" placeholder="Optional"></label>
-          <label>Bathrooms<input name="bathrooms" type="number" inputmode="numeric" min="0" placeholder="Optional"></label>
-          <label class="full">Description<textarea name="description" placeholder="Describe the property, finishing, documents available and nearby landmarks."></textarea></label>
-          <label class="full">Amenities<input name="amenities" placeholder="e.g. Parking, Security, POP, Fitted kitchen"></label>
-          <label>Your name or ID<input name="user_id" placeholder="Optional contact name"></label>
-          <label>Phone or WhatsApp<input name="contact" placeholder="Optional phone number"></label>
-          <div class="full">
-            <label for="photos">Property pictures (maximum 6)</label>
-            <input id="photos" type="file" accept="image/*" multiple style="margin-top:8px">
-            <p class="hint">Choose up to 6 photos from your phone. Extra files are ignored.</p>
-            <div id="photoPreview" class="photo-row" style="margin-top:10px"></div>
-          </div>
-          <div class="full">
-            <button class="primary-btn" id="submitListing" type="submit">Submit listing</button>
-            <div id="formStatus"></div>
-          </div>
-        </form>
-      </div>
-    </section>
-
-    <section class="section alt" id="lawfi">
-      <div class="legal-panel">
-        <p class="kicker">LAWFI LEGAL SUPPORT</p>
-        <h2>Need legal help with a property?</h2>
-        <p style="color:var(--muted);max-width:720px">
-          Get property legal support from LawFi when you need help before you buy, rent, sell or sign.
-        </p>
-
-        <div class="lawfi-offers">
-          <div><strong>PROPERTY DOCUMENT VERIFICATION</strong></div>
-          <div><strong>TITLE &amp; OWNERSHIP CHECKS</strong></div>
-          <div><strong>DOCUMENT REVIEW</strong></div>
-          <div><strong>TENANCY &amp; LANDLORD SUPPORT</strong></div>
-          <div><strong>PROPERTY AGREEMENTS</strong></div>
-          <div><strong>TRANSACTION LEGAL SUPPORT</strong></div>
-        </div>
-
-        <div class="legal-actions">
-          <button class="primary-btn" type="button" id="openLegalOptions">Get LawFi Legal Support</button>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div>
-      <div class="brand footer-brand"><span class="brand-mark">P</span><span>Property<span class="brand-muted">Marketplace</span></span></div>
-      <p>Property discovery, built for a simpler search.</p>
-    </div>
-    <div class="footer-links">
-      <a href="#search">Search</a>
-      <a href="#post">List Your Property</a>
-      <a href="#lawfi">LawFi</a>
-      <a href="https://lawfi.com.ng/" target="_blank" rel="noopener">Legal support</a>
-    </div>
-  </footer>
-
-  <div id="authModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
-    <div class="modal-card auth-card">
-      <button class="modal-close" id="authModalClose" type="button" aria-label="Close">×</button>
-      <p class="kicker">PROPERTY MARKETPLACE ACCOUNT</p>
-      <h2 id="authModalTitle" style="margin:0;color:var(--navy)">Sign in or create an account</h2>
-      <p class="auth-note" id="authIntro">Create an account to save properties, send enquiries, request inspections or list a property.</p>
-
-      <div id="authForms">
-        <div class="auth-tabs">
-          <button class="auth-tab active" id="loginTab" type="button">Sign in</button>
-          <button class="auth-tab" id="registerTab" type="button">Create account</button>
-        </div>
-
-        <form id="loginForm" class="auth-form">
-          <label class="full">Email<input name="email" type="email" required autocomplete="email" placeholder="you@example.com"></label>
-          <label class="full">Password<input name="password" type="password" required autocomplete="current-password" placeholder="Your password"></label>
-          <div class="full"><button class="primary-btn" type="submit" id="loginSubmit">Sign in</button></div>
-        </form>
-
-        <form id="registerForm" class="auth-form hidden">
-          <label class="full">Full name<input name="full_name" required autocomplete="name" placeholder="Your full name"></label>
-          <label>Email<input name="email" type="email" required autocomplete="email" placeholder="you@example.com"></label>
-          <label>Phone / WhatsApp<input name="phone" autocomplete="tel" placeholder="080... or +234..."></label>
-          <label class="full">Account type
-            <select name="role" required>
-              <option value="seeker">Property seeker</option>
-              <option value="agent">Agent</option>
-              <option value="landlord">Landlord</option>
-              <option value="developer">Developer</option>
-            </select>
-          </label>
-          <label>Password<input name="password" type="password" minlength="8" required autocomplete="new-password" placeholder="At least 8 characters"></label>
-          <label>Confirm password<input name="confirm_password" type="password" minlength="8" required autocomplete="new-password" placeholder="Repeat password"></label>
-          <div class="full"><button class="primary-btn" type="submit" id="registerSubmit">Create account</button></div>
-        </form>
-        <div id="authStatus"></div>
-      </div>
-
-      <div id="accountPanel" class="hidden">
-        <div class="account-summary" id="accountSummary"></div>
-        <div class="account-menu">
-          <button type="button" id="accountListBtn">List a property</button>
-          <button type="button" id="accountLogoutBtn">Log out</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="legalModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="legalModalTitle">
-    <div class="modal-card">
-      <button class="modal-close" id="legalModalClose" type="button" aria-label="Close">×</button>
-      <p class="kicker">LAWFI LEGAL SUPPORT</p>
-      <h2 id="legalModalTitle" style="margin:0 0 8px;color:var(--navy)">What do you need help with?</h2>
-      <p style="color:var(--muted);margin-top:0">Choose a service to continue.</p>
-
-      <div class="legal-grid" style="grid-template-columns:1fr 1fr">
-        <button class="legal-card" type="button" data-legal-choice="Property Document Verification">
-          <h3>Property Document Verification</h3>
-          <p>Review property documents before proceeding.</p>
-        </button>
-        <button class="legal-card" type="button" data-legal-choice="Title & Ownership Checks">
-          <h3>Title & Ownership Checks</h3>
-          <p>Support with ownership and title checks.</p>
-        </button>
-        <button class="legal-card" type="button" data-legal-choice="Document Review">
-          <h3>Document Review</h3>
-          <p>Review deeds, agreements and related documents.</p>
-        </button>
-        <button class="legal-card" type="button" data-legal-choice="Tenancy & Landlord Support">
-          <h3>Tenancy & Landlord Support</h3>
-          <p>Support with tenancy and landlord matters.</p>
-        </button>
-        <button class="legal-card" type="button" data-legal-choice="Property Agreements">
-          <h3>Property Agreements</h3>
-          <p>Support with property-related agreements.</p>
-        </button>
-        <button class="legal-card" type="button" data-legal-choice="Transaction Legal Support">
-          <h3>Transaction Legal Support</h3>
-          <p>Support during a property transaction.</p>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
-    <div class="modal-card">
-      <button class="modal-close" type="button" aria-label="Close">×</button>
-      <div id="modalContent"></div>
-    </div>
-  </div>
-
-  <nav class="mobile-nav" aria-label="Mobile navigation">
-    <a href="#search">⌂<span>Home</span></a>
-    <a href="#results">⌕<span>Search</span></a>
-    <a href="#post" class="mobile-post">＋<span>List</span></a>
-    <a href="#lawfi">⚖<span>LawFi</span></a>
-    <a href="#list-form">◯<span>Submit</span></a>
-  </nav>
-
-  <script>
-const MAX_PHOTOS = 6;
-const API = "/api/properties";
-const sampleProperties = [
-  {id:"demo-1",title:"4 Bedroom Detached Duplex",price:120000000,location:"Lekki Phase 1, Lagos",category:"Buy",property_type:"Duplex",bedrooms:4,bathrooms:5,area_sqm:500,featured:true,images:["https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80"],description:"Modern detached duplex with generous living spaces, private parking and a contemporary family layout.",agent:"Sample Property Listing",demo:true},
-  {id:"demo-2",title:"Luxury 3 Bedroom Apartment",price:85000000,location:"Ikoyi, Lagos",category:"Buy",property_type:"Apartment",bedrooms:3,bathrooms:4,area_sqm:210,featured:true,images:["https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80"],description:"Contemporary apartment with spacious interiors, premium finishes and a convenient city location.",agent:"Sample Property Listing",demo:true},
-  {id:"demo-3",title:"Residential Land — 600 sqm",price:45000000,location:"Sangotedo, Lagos",category:"Land",property_type:"Land",bedrooms:0,bathrooms:0,area_sqm:600,featured:true,images:["https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80"],description:"Residential land suitable for a future home or development project, subject to title and planning verification.",agent:"Sample Property Listing",demo:true},
-  {id:"demo-4",title:"4 Bedroom Semi-Detached House",price:95000000,location:"Ajah, Lagos",category:"Buy",property_type:"Detached House",bedrooms:4,bathrooms:4,area_sqm:420,featured:false,images:["https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"],description:"Well-planned family home with modern fittings, generous living areas and private parking.",agent:"Sample Property Listing",demo:true},
-  {id:"demo-5",title:"2 Bedroom Serviced Apartment",price:6500000,location:"Victoria Island, Lagos",category:"Rent",property_type:"Apartment",bedrooms:2,bathrooms:2,area_sqm:140,featured:false,images:["https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=80"],description:"Serviced apartment suitable for corporate and executive living in a central Lagos location.",agent:"Sample Property Listing",demo:true},
-  {id:"demo-6",title:"Commercial Office Space",price:18000000,location:"Ikeja, Lagos",category:"Commercial",property_type:"Commercial",bedrooms:0,bathrooms:2,area_sqm:300,featured:false,images:["https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80"],description:"Open-plan commercial office space suitable for a growing business, subject to inspection and availability.",agent:"Sample Property Listing",demo:true},
-  {id:"demo-7",title:"3 Bedroom Terrace Home",price:72000000,location:"Chevron, Lekki, Lagos",category:"Buy",property_type:"Terrace",bedrooms:3,bathrooms:4,area_sqm:260,featured:false,images:["https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1200&q=80"],description:"Modern terrace home with practical family spaces and a contemporary finish.",agent:"Sample Property Listing",demo:true},
-  {id:"demo-8",title:"2 Bedroom Apartment",price:5500000,location:"Yaba, Lagos",category:"Rent",property_type:"Apartment",bedrooms:2,bathrooms:2,area_sqm:120,featured:false,images:["https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80"],description:"Bright two-bedroom apartment suited to city living and convenient access to major routes.",agent:"Sample Property Listing",demo:true}
-];
-
-let purpose = "Buy";
-let properties = sampleProperties.slice();
-let selectedPhotos = [];
-const grid = document.getElementById("propertyGrid");
-const empty = document.getElementById("emptyState");
-const modal = document.getElementById("modal");
-const modalContent = document.getElementById("modalContent");
-const naira = n => new Intl.NumberFormat("en-NG",{style:"currency",currency:"NGN",maximumFractionDigits:0}).format(Number(n)||0).replace("NGN","₦");
-const placeholder = "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80";
-
-function normalize(p, index){
-  const images = Array.isArray(p.images) ? p.images.filter(Boolean) : (p.image_url ? [p.image_url] : (p.img ? [p.img] : []));
-  return {
-    id: p.id || ("row-"+index),
-    title: p.title || "Property listing",
-    price: Number(p.price)||0,
-    location: p.location || "",
-    category: p.category || "",
-    property_type: p.property_type || p.type || "",
-    bedrooms: Number(p.bedrooms)||0,
-    bathrooms: Number(p.bathrooms)||0,
-    area_sqm: p.area_sqm || p.size || "",
-    description: p.description || "",
-    images,
-    featured: Boolean(p.featured) || index < 3,
-    demo: Boolean(p.demo),
-    agent: p.agent || p.user_id || "Marketplace listing"
-  };
+  --navy:#0A1628;
+  --navy2:#101D33;
+  --blue:#7DBAF3;
+  --blue2:#69AEEF;
+  --lawfi-blue:#79B8F3;
+  --white:#FFFFFF;
+  --off:#F6F8FB;
+  --text:#111827;
+  --muted:#667085;
+  --border:#E1E7EF;
+  --shadow:0 14px 40px rgba(10,22,40,.08);
+  --ok:#047857;
+  --danger:#B91C1C;
 }
 
-function card(p){
-  const img = p.images[0] || placeholder;
-  const size = p.area_sqm ? p.area_sqm + " sqm" : "—";
-  return `<article class="property-card" data-id="${p.id}" tabindex="0" aria-label="View ${p.title}">
-    <div class="image-wrap">
-      <img class="property-img" src="${img}" alt="${p.title} in ${p.location}" loading="lazy">
-      <button class="save-btn" type="button" aria-label="Save ${p.title}" data-save="${p.id}">♡</button>
-      ${p.featured ? '<span class="badge image-badge">FEATURED</span>' : ''}
-    </div>
-    <div class="property-body">
-      <div class="property-title">${p.title}</div>
-      <div class="price">${naira(p.price)}</div>
-      <div class="location">📍 ${p.location}</div>
-      <div class="meta"><span>${p.bedrooms ? p.bedrooms+" beds" : (p.property_type || "Property")}</span><span>${p.bathrooms ? p.bathrooms+" baths" : "—"}</span><span>${size}</span></div>
-      <div class="agent-row"><span>${p.agent}</span><span class="demo-label">${p.demo ? "Demo listing" : "Marketplace listing"}</span></div>
-      <button class="view-btn" type="button" data-view="${p.id}">View property</button>
-    </div>
-  </article>`;
+*{
+  box-sizing:border-box;
 }
 
-function bindCards(){
-  document.querySelectorAll(".property-card").forEach(el=>{
-    el.addEventListener("click",e=>{ if(e.target.closest("button")) return; openProperty(el.dataset.id); });
-    el.addEventListener("keydown",e=>{ if(e.key==="Enter") openProperty(el.dataset.id); });
-  });
-  document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",e=>{ e.stopPropagation(); openProperty(b.dataset.view); }));
-  document.querySelectorAll("[data-save]").forEach(b=>b.addEventListener("click",e=>{
-    e.stopPropagation();
-    b.classList.toggle("saved");
-    b.textContent = b.classList.contains("saved") ? "♥" : "♡";
-  }));
+html{
+  scroll-behavior:smooth;
 }
 
-function render(list, heading){
-  const items = list || properties;
-  grid.innerHTML = items.map(card).join("");
-  document.querySelector("#results h2").textContent = heading || "Featured properties";
-  empty.classList.toggle("hidden", !!items.length);
-  bindCards();
+body{
+  margin:0;
+  font-family:Inter,system-ui,sans-serif;
+  color:var(--text);
+  background:white;
+  line-height:1.5;
 }
 
-function openProperty(id){
-  const p = properties.find(x=>String(x.id)===String(id));
-  if(!p) return;
-  const imgs = p.images.length ? p.images : [placeholder];
-  modalContent.innerHTML = `
-    <img class="detail-img" id="detailMain" src="${imgs[0]}" alt="${p.title}">
-    ${imgs.length>1 ? `<div class="thumbs">${imgs.map((src,i)=>`<img class="${i===0?"active":""}" src="${src}" data-src="${src}" alt="Photo ${i+1}">`).join("")}</div>` : ""}
-    <span class="badge" style="margin-top:14px">${p.featured ? "FEATURED" : (p.category || "PROPERTY")}</span>
-    <h2 style="margin:9px 0 3px;color:var(--navy)">${p.title}</h2>
-    <div class="detail-price">${naira(p.price)}</div>
-    <p class="location">📍 ${p.location}</p>
-    <div class="detail-grid">
-      <div class="detail-item"><b>Type</b><br>${p.property_type || "—"}</div>
-      <div class="detail-item"><b>Size</b><br>${p.area_sqm ? p.area_sqm+" sqm" : "—"}</div>
-      <div class="detail-item"><b>Bedrooms</b><br>${p.bedrooms || "—"}</div>
-      <div class="detail-item"><b>Bathrooms</b><br>${p.bathrooms || "—"}</div>
-    </div>
-    <h3>Description</h3>
-    <p>${p.description || "No additional description provided."}</p>
-    <p><b>Listing status:</b> ${p.demo ? "Demo listing — live submissions go through the marketplace review process." : "Submitted through Property Marketplace."}</p>
-    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
-      <a class="primary-btn" href="#lawfi">Request LawFi title check</a>
-      <a class="secondary-btn" href="#lawfi">Document review</a>
-    </div>`;
-  modal.classList.remove("hidden");
-  modalContent.querySelectorAll(".thumbs img").forEach(img=>{
-    img.addEventListener("click",()=>{
-      document.getElementById("detailMain").src = img.dataset.src;
-      modalContent.querySelectorAll(".thumbs img").forEach(x=>x.classList.remove("active"));
-      img.classList.add("active");
-    });
-  });
+button,
+input,
+select,
+textarea{
+  font:inherit;
 }
 
-function applySearch(){
-  const loc = document.getElementById("location").value.trim().toLowerCase();
-  const type = document.getElementById("type").value;
-  const min = Number(document.getElementById("minPrice").value) || 0;
-  const max = Number(document.getElementById("maxPrice").value) || Infinity;
-  const out = properties.filter(p =>
-    (!loc || (p.location||"").toLowerCase().includes(loc)) &&
-    (!type || p.property_type === type) &&
-    (!purpose || purpose === "Buy" || (p.category||"").toLowerCase() === purpose.toLowerCase() || p.property_type === purpose) &&
-    p.price >= min && p.price <= max
-  );
-  render(out, out.length ? "Search results" : "Search results");
-  document.getElementById("results").scrollIntoView({behavior:"smooth"});
+button,
+a{
+  touch-action:manipulation;
 }
 
-function fileToDataUrl(file){
-  return new Promise((resolve,reject)=>{
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
+/* HEADER */
+
+.site-header{
+  height:72px;
+  padding:0 clamp(18px,5vw,64px);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;
+  background:rgba(255,255,255,.97);
+  backdrop-filter:blur(10px);
+  z-index:20;
 }
 
-function renderPhotoPreview(){
-  const box = document.getElementById("photoPreview");
-  if(!selectedPhotos.length){
-    box.innerHTML = `<div class="photo-box">No pictures selected yet<br>Maximum ${MAX_PHOTOS}</div>`;
-    return;
-  }
-  box.innerHTML = selectedPhotos.map((src,i)=>`
-    <div class="photo-box">
-      <img src="${src}" alt="Property photo ${i+1}">
-      <button type="button" data-remove="${i}" aria-label="Remove photo">×</button>
-    </div>`).join("");
-  box.querySelectorAll("[data-remove]").forEach(btn=>{
-    btn.addEventListener("click",()=>{
-      selectedPhotos.splice(Number(btn.dataset.remove),1);
-      renderPhotoPreview();
-    });
-  });
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:var(--navy);
+  text-decoration:none;
+  font-weight:800;
+  font-size:18px;
 }
 
-async function loadLiveProperties(){
-  try{
-    const res = await fetch(API);
-    if(!res.ok) throw new Error("bad status");
-    const data = await res.json();
-    const live = Array.isArray(data.properties) ? data.properties.map(normalize) : [];
-    properties = live.length ? live.concat(sampleProperties.map(normalize)) : sampleProperties.map(normalize);
-  }catch(err){
-    properties = sampleProperties.map(normalize);
-  }
-  render(properties.filter(p=>p.featured).length ? properties.filter(p=>p.featured) : properties.slice(0,6), "Featured properties");
+.brand-mark{
+  width:34px;
+  height:34px;
+  border-radius:9px;
+  background:var(--navy);
+  color:white;
+  display:grid;
+  place-items:center;
+  font-weight:800;
 }
 
-
-
-const authModal = document.getElementById("authModal");
-const authStatus = document.getElementById("authStatus");
-const authForms = document.getElementById("authForms");
-const accountPanel = document.getElementById("accountPanel");
-let currentUser = null;
-let pendingAction = null;
-
-function showAuth(mode="login", action=null){
-  pendingAction = action;
-  authModal.classList.remove("hidden");
-  authForms.classList.remove("hidden");
-  accountPanel.classList.add("hidden");
-  authStatus.innerHTML = "";
-  setAuthMode(mode);
+.brand-muted{
+  font-weight:500;
+  color:var(--muted);
+  margin-left:3px;
 }
 
-function setAuthMode(mode){
-  const login = mode === "login";
-  document.getElementById("loginTab").classList.toggle("active", login);
-  document.getElementById("registerTab").classList.toggle("active", !login);
-  document.getElementById("loginForm").classList.toggle("hidden", !login);
-  document.getElementById("registerForm").classList.toggle("hidden", login);
+.desktop-nav{
+  display:flex;
+  align-items:center;
+  gap:22px;
 }
 
-function renderAccountState(){
-  const btn = document.getElementById("accountBtn");
-  if(currentUser){
-    btn.textContent = "Account";
-    btn.classList.add("logged");
-  }else{
-    btn.textContent = "Sign in";
-    btn.classList.remove("logged");
-  }
+.desktop-nav a{
+  color:var(--text);
+  text-decoration:none;
+  font-size:14px;
+  font-weight:700;
 }
 
-function showAccountPanel(){
-  if(!currentUser){ showAuth("login"); return; }
-  authModal.classList.remove("hidden");
-  authForms.classList.add("hidden");
-  accountPanel.classList.remove("hidden");
-  document.getElementById("accountSummary").innerHTML = `
-    <strong>${currentUser.full_name}</strong>
-    <div>${currentUser.email}</div>
-    <div style="margin-top:5px;text-transform:capitalize">Account: ${currentUser.role}</div>`;
+.nav-login{
+  border:1px solid var(--border);
+  padding:10px 15px;
+  border-radius:10px;
 }
 
-function continuePendingAction(){
-  const action = pendingAction;
-  pendingAction = null;
-  if(action === "list"){
-    document.getElementById("post").scrollIntoView({behavior:"smooth"});
-    setTimeout(()=>document.getElementById("list-form").scrollIntoView({behavior:"smooth"}),250);
-  }
+.nav-post{
+  padding:11px 16px;
+  background:var(--navy)!important;
+  color:white!important;
+  border-radius:10px;
 }
 
-async function checkAuth(){
-  try{
-    const res = await fetch("/api/auth/me", {credentials:"same-origin"});
-    const data = await res.json();
-    currentUser = data.authenticated ? data.user : null;
-  }catch(e){ currentUser = null; }
-  renderAccountState();
+.menu-btn{
+  display:none;
+  background:none;
+  border:0;
+  font-size:25px;
 }
 
-document.getElementById("accountBtn").addEventListener("click",()=>{
-  currentUser ? showAccountPanel() : showAuth("login");
-});
-document.getElementById("mobileAccountBtn").addEventListener("click",e=>{
-  e.preventDefault();
-  currentUser ? showAccountPanel() : showAuth("login");
-});
-document.getElementById("authModalClose").addEventListener("click",()=>authModal.classList.add("hidden"));
-authModal.addEventListener("click",e=>{ if(e.target===authModal) authModal.classList.add("hidden"); });
-document.getElementById("loginTab").addEventListener("click",()=>setAuthMode("login"));
-document.getElementById("registerTab").addEventListener("click",()=>setAuthMode("register"));
+/* HERO */
 
-document.getElementById("loginForm").addEventListener("submit",async e=>{
-  e.preventDefault();
-  const form=e.target;
-  const btn=document.getElementById("loginSubmit");
-  authStatus.innerHTML="";
-  btn.disabled=true; btn.textContent="Signing in...";
-  try{
-    const res=await fetch("/api/auth/login",{
-      method:"POST",credentials:"same-origin",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({email:form.email.value.trim(),password:form.password.value})
-    });
-    const data=await res.json().catch(()=>({}));
-    if(!res.ok || !data.ok) throw new Error(data.error || "Unable to sign in.");
-    currentUser=data.user;
-    renderAccountState();
-    authModal.classList.add("hidden");
-    form.reset();
-    continuePendingAction();
-  }catch(err){
-    authStatus.innerHTML=`<div class="status-msg err">${err.message}</div>`;
-  }finally{
-    btn.disabled=false; btn.textContent="Sign in";
-  }
-});
+.hero{
+  background:linear-gradient(180deg,#F6F8FB 0%,#fff 100%);
+  padding:72px 20px 38px;
+}
 
-document.getElementById("registerForm").addEventListener("submit",async e=>{
-  e.preventDefault();
-  const form=e.target;
-  const btn=document.getElementById("registerSubmit");
-  if(form.password.value!==form.confirm_password.value){
-    authStatus.innerHTML='<div class="status-msg err">Passwords do not match.</div>';
-    return;
-  }
-  authStatus.innerHTML="";
-  btn.disabled=true; btn.textContent="Creating account...";
-  try{
-    const res=await fetch("/api/auth/register",{
-      method:"POST",credentials:"same-origin",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        full_name:form.full_name.value.trim(),
-        email:form.email.value.trim(),
-        phone:form.phone.value.trim(),
-        password:form.password.value,
-        role:form.role.value
-      })
-    });
-    const data=await res.json().catch(()=>({}));
-    if(!res.ok || !data.ok) throw new Error(data.error || "Unable to create account.");
-    authStatus.innerHTML='<div class="status-msg ok">Account created. You can now sign in.</div>';
-    form.reset();
-    setTimeout(()=>setAuthMode("login"),500);
-  }catch(err){
-    authStatus.innerHTML=`<div class="status-msg err">${err.message}</div>`;
-  }finally{
-    btn.disabled=false; btn.textContent="Create account";
-  }
-});
+.hero-inner{
+  max-width:1180px;
+  margin:auto;
+}
 
-document.getElementById("accountLogoutBtn").addEventListener("click",async()=>{
-  await fetch("/api/auth/logout",{method:"POST",credentials:"same-origin"}).catch(()=>{});
-  currentUser=null;
-  renderAccountState();
-  authModal.classList.add("hidden");
-});
-document.getElementById("accountListBtn").addEventListener("click",()=>{
-  authModal.classList.add("hidden");
-  document.getElementById("post").scrollIntoView({behavior:"smooth"});
-});
-document.getElementById("openListingBtn").addEventListener("click",()=>{
-  if(!currentUser){ showAuth("login","list"); return; }
-  document.getElementById("post").scrollIntoView({behavior:"smooth"});
-});
+.eyebrow,
+.kicker{
+  font-size:12px;
+  letter-spacing:.12em;
+  font-weight:800;
+  color:#4B6687;
+  margin:0 0 9px;
+}
 
-const legalModal = document.getElementById("legalModal");
-document.getElementById("openLegalOptions").addEventListener("click",()=>{
-  legalModal.classList.remove("hidden");
-});
-document.getElementById("legalModalClose").addEventListener("click",()=>{
-  legalModal.classList.add("hidden");
-});
-legalModal.addEventListener("click",e=>{
-  if(e.target===legalModal) legalModal.classList.add("hidden");
-});
-document.querySelectorAll("[data-legal-choice]").forEach(choice=>{
-  choice.addEventListener("click",()=>{
-    const service = encodeURIComponent(choice.dataset.legalChoice);
-    window.open("https://lawfi.com.ng/?service="+service, "_blank", "noopener");
-  });
-});
+.hero h1{
+  font-size:clamp(40px,7vw,74px);
+  line-height:1.02;
+  letter-spacing:-.055em;
+  margin:0;
+  max-width:800px;
+  color:var(--navy);
+}
 
-document.querySelector(".modal-close").addEventListener("click",()=>modal.classList.add("hidden"));
-modal.addEventListener("click",e=>{ if(e.target===modal) modal.classList.add("hidden"); });
-document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
-  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
-  t.classList.add("active");
-  purpose = t.dataset.purpose;
-  const map = {Buy:"#buy",Rent:"#rent",Land:"#land",Shortlet:"#shortlet",Commercial:"#commercial"};
-}));
-document.getElementById("searchForm").addEventListener("submit",e=>{ e.preventDefault(); applySearch(); });
-document.querySelectorAll("[data-location]").forEach(b=>b.addEventListener("click",()=>{
-  document.getElementById("location").value = b.dataset.location;
-  document.getElementById("searchForm").requestSubmit();
-}));
-document.querySelectorAll("[data-category]").forEach(b=>b.addEventListener("click",()=>{
-  const out = properties.filter(p=>p.property_type===b.dataset.category);
-  render(out, b.querySelector("strong").textContent);
-  document.getElementById("results").scrollIntoView({behavior:"smooth"});
-}));
-document.getElementById("clearSearch").addEventListener("click",()=>{
-  document.getElementById("searchForm").reset();
-  purpose = "Buy";
-  document.querySelectorAll(".tab").forEach((x,i)=>x.classList.toggle("active", i===0));
-  render(properties.filter(p=>p.featured).length ? properties.filter(p=>p.featured) : properties, "Featured properties");
-  document.getElementById("results").scrollIntoView({behavior:"smooth"});
-});
-document.querySelector(".menu-btn").addEventListener("click",()=>{
-  document.getElementById("post").scrollIntoView({behavior:"smooth"});
-});
-document.getElementById("photos").addEventListener("change", async e=>{
-  const files = Array.from(e.target.files || []);
-  const room = MAX_PHOTOS - selectedPhotos.length;
-  const chosen = files.slice(0, room);
-  for(const file of chosen){
-    selectedPhotos.push(await fileToDataUrl(file));
-  }
-  if(files.length > room){
-    document.getElementById("formStatus").innerHTML = `<div class="status-msg err">Only ${MAX_PHOTOS} pictures are allowed. Extra photos were not added.</div>`;
-  }
-  e.target.value = "";
-  renderPhotoPreview();
-});
-document.getElementById("listForm").addEventListener("submit", async e=>{
-  e.preventDefault();
-  if(!currentUser){ showAuth("login","list"); return; }
-  const form = e.target;
-  const status = document.getElementById("formStatus");
-  const btn = document.getElementById("submitListing");
-  if(selectedPhotos.length > MAX_PHOTOS){
-    status.innerHTML = `<div class="status-msg err">A property can have a maximum of 6 pictures.</div>`;
-    return;
-  }
-  const amenitiesRaw = form.amenities.value.trim();
-  const payload = {
-    title: form.title.value.trim(),
-    category: form.category.value,
-    property_type: form.property_type.value,
-    price: Number(form.price.value),
-    location: form.location.value.trim(),
-    description: [form.description.value.trim(), form.contact.value.trim() ? ("Contact: "+form.contact.value.trim()) : ""].filter(Boolean).join("\n"),
-    user_id: form.user_id.value.trim() || null,
-    bedrooms: form.bedrooms.value ? Number(form.bedrooms.value) : null,
-    bathrooms: form.bathrooms.value ? Number(form.bathrooms.value) : null,
-    area_sqm: form.area_sqm.value ? Number(form.area_sqm.value) : null,
-    amenities: amenitiesRaw ? amenitiesRaw.split(",").map(s=>s.trim()).filter(Boolean) : [],
-    images: selectedPhotos.slice(0, MAX_PHOTOS)
-  };
-  btn.disabled = true;
-  btn.textContent = "Submitting...";
-  status.innerHTML = "";
-  try{
-    const res = await fetch(API, {
-      method: "POST",
-      headers: {"Content-Type":"application/json"},
-      body: JSON.stringify(payload)
-    });
-    const data = await res.json().catch(()=>({}));
-    if(!res.ok || data.ok === false){
-      throw new Error(data.error || "Unable to create property listing.");
-    }
-    status.innerHTML = `<div class="status-msg ok">${data.message || "Property submitted successfully."} Status: ${data.status || "pending"}.</div>`;
-    form.reset();
-    selectedPhotos = [];
-    renderPhotoPreview();
-  }catch(err){
-    status.innerHTML = `<div class="status-msg err">${err.message}</div>`;
-  }finally{
-    btn.disabled = false;
-    btn.textContent = "Submit listing";
-  }
-});
+.hero h1 span{
+  color:#268AC4;
+}
 
-renderPhotoPreview();
-loadLiveProperties();
-checkAuth();
-  </script>
-</body>
-</html>
+.hero-copy{
+  max-width:620px;
+  font-size:18px;
+  color:var(--muted);
+  margin:20px 0 32px;
+}
+
+/* SEARCH */
+
+.search-panel{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:20px;
+  box-shadow:var(--shadow);
+  padding:16px;
+}
+
+.search-tabs{
+  display:flex;
+  gap:5px;
+  margin-bottom:15px;
+  overflow:auto;
+}
+
+.tab{
+  border:0;
+  background:transparent;
+  padding:10px 15px;
+  border-radius:9px;
+  color:var(--muted);
+  font-weight:700;
+  white-space:nowrap;
+}
+
+.tab.active{
+  background:var(--navy);
+  color:white;
+}
+
+.search-form{
+  display:grid;
+  grid-template-columns:1.4fr 1fr .8fr .8fr auto;
+  gap:10px;
+  align-items:end;
+}
+
+.search-form label,
+.list-form label{
+  font-size:12px;
+  color:var(--muted);
+  font-weight:700;
+}
+
+.search-form input,
+.search-form select,
+.list-form input,
+.list-form select,
+.list-form textarea,
+.auth-form input,
+.auth-form select{
+  display:block;
+  width:100%;
+  margin-top:6px;
+  height:46px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:0 12px;
+  background:white;
+  color:var(--text);
+  outline:none;
+}
+
+.list-form textarea{
+  height:110px;
+  padding:12px;
+  resize:vertical;
+}
+
+.search-form input:focus,
+.search-form select:focus,
+.list-form input:focus,
+.list-form select:focus,
+.list-form textarea:focus,
+.auth-form input:focus,
+.auth-form select:focus{
+  border-color:var(--blue2);
+  box-shadow:0 0 0 3px rgba(125,186,243,.18);
+}
+
+.primary-btn,
+.secondary-btn{
+  border:0;
+  border-radius:10px;
+  padding:13px 17px;
+  font-weight:800;
+  cursor:pointer;
+  text-decoration:none;
+  display:inline-block;
+}
+
+.primary-btn{
+  background:var(--navy);
+  color:white;
+}
+
+.secondary-btn{
+  background:white;
+  color:var(--navy);
+  border:1px solid var(--border);
+}
+
+.search-btn{
+  height:46px;
+  white-space:nowrap;
+}
+
+.quick-links{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
+  margin-top:16px;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.quick-links button,
+.text-btn{
+  border:0;
+  background:none;
+  color:var(--navy);
+  font-weight:700;
+  cursor:pointer;
+  padding:4px;
+}
+
+/* SECTIONS */
+
+.section{
+  max-width:1180px;
+  margin:auto;
+  padding:72px 20px;
+}
+
+.section.alt{
+  max-width:none;
+  background:var(--off);
+}
+
+.section.alt>*{
+  max-width:1180px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  margin-bottom:24px;
+  gap:16px;
+}
+
+.section h2{
+  font-size:clamp(26px,4vw,38px);
+  letter-spacing:-.035em;
+  margin:0;
+  color:var(--navy);
+}
+
+/* PROPERTY CARDS */
+
+.property-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.property-card{
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+  background:white;
+  box-shadow:0 6px 24px rgba(10,22,40,.05);
+  cursor:pointer;
+  transition:.2s ease;
+  display:flex;
+  flex-direction:column;
+}
+
+.property-card:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--shadow);
+}
+
+.image-wrap{
+  position:relative;
+}
+
+.property-img{
+  height:220px;
+  width:100%;
+  object-fit:cover;
+  background:#e9edf2;
+  display:block;
+}
+
+.save-btn{
+  position:absolute;
+  right:12px;
+  top:12px;
+  width:38px;
+  height:38px;
+  border:0;
+  border-radius:50%;
+  background:rgba(255,255,255,.94);
+  color:var(--navy);
+  font-size:22px;
+  cursor:pointer;
+}
+
+.save-btn.saved{
+  color:#dc2626;
+}
+
+.image-badge{
+  position:absolute;
+  left:12px;
+  top:12px;
+}
+
+.property-body{
+  padding:16px;
+}
+
+.badge{
+  display:inline-block;
+  background:#E9F8FF;
+  color:#08739B;
+  border-radius:999px;
+  padding:5px 9px;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.04em;
+}
+
+.property-title{
+  font-size:17px;
+  font-weight:800;
+  margin:10px 0 4px;
+  color:var(--navy);
+}
+
+.price{
+  font-size:20px;
+  font-weight:800;
+  color:var(--navy);
+}
+
+.location{
+  font-size:13px;
+  color:var(--muted);
+  margin:5px 0 13px;
+}
+
+.meta{
+  display:flex;
+  gap:13px;
+  color:var(--muted);
+  font-size:12px;
+  padding-top:12px;
+  border-top:1px solid var(--border);
+}
+
+.agent-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  margin-top:14px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.demo-label{
+  color:var(--muted);
+  font-weight:600;
+  font-size:10px;
+}
+
+.view-btn{
+  margin-top:14px;
+  width:100%;
+  border:1px solid var(--navy);
+  background:white;
+  color:var(--navy);
+  border-radius:10px;
+  padding:11px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+/* CATEGORY */
+
+.category-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+
+.category-card{
+  text-align:left;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:22px;
+  min-height:120px;
+  cursor:pointer;
+}
+
+.category-card strong{
+  display:block;
+  color:var(--navy);
+  font-size:17px;
+  margin-bottom:7px;
+}
+
+.category-card span{
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* LISTING CTA */
+
+.cta{
+  background:var(--navy);
+  color:white;
+  border-radius:22px;
+  padding:38px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:25px;
+}
+
+.cta h2{
+  margin:0;
+  font-size:34px;
+}
+
+.cta p:not(.kicker){
+  color:#CBD5E1;
+  max-width:650px;
+}
+
+.cta .primary-btn{
+  background:var(--blue);
+  color:var(--navy);
+  white-space:nowrap;
+}
+
+/* LISTING FORM */
+
+.list-wrap{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:28px;
+  box-shadow:var(--shadow);
+}
+
+.list-form{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.list-form .full{
+  grid-column:1/-1;
+}
+
+.hint{
+  font-size:12px;
+  color:var(--muted);
+  font-weight:500;
+  margin-top:6px;
+}
+
+.photo-row{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.photo-box{
+  border:1px dashed var(--border);
+  border-radius:12px;
+  min-height:92px;
+  background:var(--off);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:10px;
+  text-align:center;
+  font-size:12px;
+  color:var(--muted);
+  position:relative;
+  overflow:hidden;
+}
+
+.photo-box img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.photo-box button{
+  position:absolute;
+  top:6px;
+  right:6px;
+  border:0;
+  background:white;
+  border-radius:50%;
+  width:26px;
+  height:26px;
+  cursor:pointer;
+  z-index:1;
+}
+
+.status-msg{
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius:12px;
+  font-weight:600;
+  font-size:14px;
+}
+
+.status-msg.ok{
+  background:#ECFDF5;
+  color:var(--ok);
+}
+
+.status-msg.err{
+  background:#FEF2F2;
+  color:var(--danger);
+}
+
+/* LAWFI */
+
+.lawfi-section{
+  background:var(--navy);
+  color:white;
+  max-width:none;
+  padding:82px 20px;
+}
+
+.lawfi-inner{
+  max-width:1180px;
+  margin:auto;
+}
+
+.lawfi-kicker{
+  color:var(--lawfi-blue);
+  font-size:13px;
+  letter-spacing:.18em;
+  font-weight:800;
+  margin:0 0 10px;
+}
+
+.lawfi-heading{
+  color:white!important;
+  font-size:clamp(34px,6vw,58px)!important;
+  line-height:1.03;
+  max-width:750px;
+}
+
+.lawfi-intro{
+  color:#D5DFEC;
+  max-width:760px;
+  font-size:17px;
+  margin:18px 0 34px;
+}
+
+.lawfi-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.lawfi-card{
+  background:white;
+  border:3px solid #DDE5EE;
+  border-radius:24px;
+  padding:30px;
+  min-height:230px;
+  color:var(--navy);
+  transition:.2s ease;
+}
+
+.lawfi-card:hover{
+  transform:translateY(-3px);
+  border-color:var(--lawfi-blue);
+}
+
+.lawfi-icon{
+  font-size:30px;
+  margin-bottom:15px;
+}
+
+.lawfi-card h3{
+  margin:0 0 12px;
+  color:var(--navy);
+  font-size:20px;
+  line-height:1.2;
+}
+
+.lawfi-card p{
+  margin:0;
+  color:#6B7789;
+  font-size:15px;
+  line-height:1.7;
+}
+
+.lawfi-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:30px;
+}
+
+.lawfi-primary{
+  background:var(--lawfi-blue);
+  color:var(--navy);
+  padding:15px 20px;
+  border-radius:12px;
+  font-weight:800;
+  text-decoration:none;
+}
+
+.lawfi-secondary{
+  color:white;
+  border:1px solid rgba(255,255,255,.35);
+  padding:15px 20px;
+  border-radius:12px;
+  font-weight:800;
+  text-decoration:none;
+}
+
+/* LOGIN / ACCOUNT */
+
+.account-panel{
+  background:var(--off);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:28px;
+}
+
+.account-box{
+  max-width:700px;
+  margin:auto;
+  text-align:center;
+}
+
+.account-box h2{
+  color:var(--navy);
+}
+
+.account-box p{
+  color:var(--muted);
+}
+
+.account-actions{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:20px;
+}
+
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.52);
+  display:grid;
+  place-items:center;
+  padding:18px;
+  z-index:50;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.modal-card{
+  background:white;
+  max-width:650px;
+  width:100%;
+  max-height:90vh;
+  overflow:auto;
+  border-radius:22px;
+  padding:28px;
+  position:relative;
+}
+
+.modal-close{
+  position:absolute;
+  right:15px;
+  top:12px;
+  border:0;
+  background:var(--off);
