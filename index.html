@@ -669,3 +669,228 @@ button,a{touch-action:manipulation}
   overflow:auto;
   margin:10px 0;
 }
+function showAccountPanel(){
+  if(!currentUser){ showAuth("login"); return; }
+  authModal.classList.remove("hidden");
+  authForms.classList.add("hidden");
+  accountPanel.classList.remove("hidden");
+  document.getElementById("accountSummary").innerHTML = `
+    <strong>${currentUser.full_name}</strong>
+    <div>${currentUser.email}</div>
+    <div style="margin-top:5px;text-transform:capitalize">Account: ${currentUser.role}</div>`;
+}
+
+function continuePendingAction(){
+  const action = pendingAction;
+  pendingAction = null;
+  if(action === "list"){
+    document.getElementById("post").scrollIntoView({behavior:"smooth"});
+    setTimeout(()=>document.getElementById("list-form").scrollIntoView({behavior:"smooth"}),250);
+  }
+}
+
+async function checkAuth(){
+  try{
+    const res = await fetch("/api/auth/me", {credentials:"same-origin"});
+    const data = await res.json();
+    currentUser = data.authenticated ? data.user : null;
+  }catch(e){ currentUser = null; }
+  renderAccountState();
+}
+
+document.getElementById("accountBtn").addEventListener("click",()=>{
+  currentUser ? showAccountPanel() : showAuth("login");
+});
+document.getElementById("mobileAccountBtn").addEventListener("click",e=>{
+  e.preventDefault();
+  currentUser ? showAccountPanel() : showAuth("login");
+});
+document.getElementById("authModalClose").addEventListener("click",()=>authModal.classList.add("hidden"));
+authModal.addEventListener("click",e=>{ if(e.target===authModal) authModal.classList.add("hidden"); });
+document.getElementById("loginTab").addEventListener("click",()=>setAuthMode("login"));
+document.getElementById("registerTab").addEventListener("click",()=>setAuthMode("register"));
+
+document.getElementById("loginForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const form=e.target;
+  const btn=document.getElementById("loginSubmit");
+  authStatus.innerHTML="";
+  btn.disabled=true; btn.textContent="Signing in...";
+  try{
+    const res=await fetch("/api/auth/login",{
+      method:"POST",credentials:"same-origin",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({email:form.email.value.trim(),password:form.password.value})
+    });
+    const data=await res.json().catch(()=>({}));
+    if(!res.ok || !data.ok) throw new Error(data.error || "Unable to sign in.");
+    currentUser=data.user;
+    renderAccountState();
+    authModal.classList.add("hidden");
+    form.reset();
+    continuePendingAction();
+  }catch(err){
+    authStatus.innerHTML=`<div class="status-msg err">${err.message}</div>`;
+  }finally{
+    btn.disabled=false; btn.textContent="Sign in";
+  }
+});
+
+document.getElementById("registerForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const form=e.target;
+  const btn=document.getElementById("registerSubmit");
+  if(form.password.value!==form.confirm_password.value){
+    authStatus.innerHTML='<div class="status-msg err">Passwords do not match.</div>';
+    return;
+  }
+  authStatus.innerHTML="";
+  btn.disabled=true; btn.textContent="Creating account...";
+  try{
+    const res=await fetch("/api/auth/register",{
+      method:"POST",credentials:"same-origin",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        full_name:form.full_name.value.trim(),
+        email:form.email.value.trim(),
+        phone:form.phone.value.trim(),
+        password:form.password.value,
+        role:form.role.value
+      })
+    });
+    const data=await res.json().catch(()=>({}));
+    if(!res.ok || !data.ok) throw new Error(data.error || "Unable to create account.");
+    authStatus.innerHTML='<div class="status-msg ok">Account created. You can now sign in.</div>';
+    form.reset();
+    setTimeout(()=>setAuthMode("login"),500);
+  }catch(err){
+    authStatus.innerHTML=`<div class="status-msg err">${err.message}</div>`;
+  }finally{
+    btn.disabled=false; btn.textContent="Create account";
+  }
+});
+
+document.getElementById("accountLogoutBtn").addEventListener("click",async()=>{
+  await fetch("/api/auth/logout",{method:"POST",credentials:"same-origin"}).catch(()=>{});
+  currentUser=null;
+  renderAccountState();
+  authModal.classList.add("hidden");
+});
+document.getElementById("accountListBtn").addEventListener("click",()=>{
+  authModal.classList.add("hidden");
+  document.getElementById("post").scrollIntoView({behavior:"smooth"});
+});
+document.getElementById("openListingBtn").addEventListener("click",()=>{
+  if(!currentUser){ showAuth("login","list"); return; }
+  document.getElementById("post").scrollIntoView({behavior:"smooth"});
+});
+
+const legalModal = document.getElementById("legalModal");
+document.getElementById("openLegalOptions").addEventListener("click",()=>{
+  legalModal.classList.remove("hidden");
+});
+document.getElementById("legalModalClose").addEventListener("click",()=>{
+  legalModal.classList.add("hidden");
+});
+legalModal.addEventListener("click",e=>{
+  if(e.target===legalModal) legalModal.classList.add("hidden");
+});
+document.querySelectorAll("[data-legal-choice]").forEach(choice=>{
+  choice.addEventListener("click",()=>{
+    const service = encodeURIComponent(choice.dataset.legalChoice);
+    window.open("https://lawfi.com.ng/?service="+service, "_blank", "noopener");
+  });
+});
+
+document.querySelector(".modal-close").addEventListener("click",()=>modal.classList.add("hidden"));
+modal.addEventListener("click",e=>{ if(e.target===modal) modal.classList.add("hidden"); });
+document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  t.classList.add("active");
+  purpose = t.dataset.purpose;
+  const map = {Buy:"#buy",Rent:"#rent",Land:"#land",Shortlet:"#shortlet",Commercial:"#commercial"};
+}));
+document.getElementById("searchForm").addEventListener("submit",e=>{ e.preventDefault(); applySearch(); });
+document.querySelectorAll("[data-location]").forEach(b=>b.addEventListener("click",()=>{
+  document.getElementById("location").value = b.dataset.location;
+  document.getElementById("searchForm").requestSubmit();
+}));
+document.querySelectorAll("[data-category]").forEach(b=>b.addEventListener("click",()=>{
+  const out = properties.filter(p=>p.property_type===b.dataset.category);
+  render(out, b.querySelector("strong").textContent);p
+       document.getElementById("results").scrollIntoView({behavior:"smooth"});
+}));
+document.getElementById("clearSearch").addEventListener("click",()=>{
+  document.getElementById("searchForm").reset();
+  purpose = "Buy";
+  document.querySelectorAll(".tab").forEach((x,i)=>x.classList.toggle("active", i===0));
+  render(properties.filter(p=>p.featured).length ? properties.filter(p=>p.featured) : properties, "Featured properties");
+  document.getElementById("results").scrollIntoView({behavior:"smooth"});
+});
+document.querySelector(".menu-btn").addEventListener("click",()=>{
+  document.getElementById("post").scrollIntoView({behavior:"smooth"});
+});
+document.getElementById("photos").addEventListener("change", async e=>{
+  const files = Array.from(e.target.files || []);
+  const room = MAX_PHOTOS - selectedPhotos.length;
+  const chosen = files.slice(0, room);
+  for(const file of chosen){
+    selectedPhotos.push(await fileToDataUrl(file));
+  }
+  if(files.length > room){
+    document.getElementById("formStatus").innerHTML = `<div class="status-msg err">Only ${MAX_PHOTOS} pictures are allowed. Extra photos were not added.</div>`;
+  }
+  e.target.value = "";
+  renderPhotoPreview();
+});
+document.getElementById("listForm").addEventListener("submit", async e=>{
+  e.preventDefault();
+  if(!currentUser){ showAuth("login","list"); return; }
+  const form = e.target;
+  const status = document.getElementById("formStatus");
+  const btn = document.getElementById("submitListing");
+  status.innerHTML="";
+  btn.disabled=true;
+  btn.textContent="Submitting...";
+  try{
+    const payload = {
+      user_id: currentUser.id,
+      title: form.title.value.trim(),
+      description: form.description.value.trim(),
+      category: form.category.value,
+      property_type: form.property_type.value,
+      price: Number(form.price.value),
+      location: form.location.value.trim(),
+      bedrooms: Number(form.bedrooms.value) || null,
+      bathrooms: Number(form.bathrooms.value) || null,
+      area_sqm: Number(form.area_sqm.value) || null,
+      amenities: form.amenities.value.trim(),
+      images: selectedPhotos
+    };
+    if(!payload.title || !payload.category || !payload.property_type || !payload.price || !payload.location){
+      throw new Error("Please complete all required fields.");
+    }
+    const res = await fetch("/api/properties",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(payload)
+    });
+    const data = await res.json().catch(()=>({}));
+    if(!res.ok || !data.ok) throw new Error(data.error || "Unable to submit listing.");
+    status.innerHTML='<div class="status-msg ok">Property submitted successfully. It will appear after review.</div>';
+    form.reset();
+    selectedPhotos=[];
+    renderPhotoPreview();
+  }catch(err){
+    status.innerHTML=`<div class="status-msg err">${err.message}</div>`;
+  }finally{
+    btn.disabled=false;
+    btn.textContent="Submit listing";
+  }
+});
+  renderPhotoPreview();
+loadLiveProperties();
+checkAuth();
+  </script>
+</body>
+</html>
